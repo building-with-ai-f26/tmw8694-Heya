@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heya</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #1f2328;
+      --muted: #59636e;
+      --bg: #ffffff;
+      --accent: #0969da;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e6edf3;
+        --muted: #9198a1;
+        --bg: #0d1117;
+        --accent: #4493f8;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    main {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    h1 { margin: 0 0 0.25rem; font-size: 2.5rem; }
+    .tagline { margin: 0 0 2rem; color: var(--muted); }
+    a { color: var(--accent); }
+    footer { margin-top: 3rem; font-size: 0.875rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Heya</h1>
+    <p class="tagline">A project for Building with AI, Fall 2026.</p>
+
+    <section>
+      <h2>About</h2>
+      <p>This page is the home for the project. Details coming soon.</p>
+    </section>
+
+    <footer>
+      <a href="https://github.com/building-with-ai-f26/tmw8694-Heya">View on GitHub</a>
+    </footer>
+  </main>
+</body>
+</html>
