@@ -3,21 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Heya</title>
+  <title>Heya: PRD v1</title>
   <style>
     :root {
       color-scheme: light dark;
       --text: #1f2328;
       --muted: #59636e;
       --bg: #ffffff;
+      --surface: #f6f8fa;
+      --border: #d1d9e0;
       --accent: #0969da;
+      --green: #1a7f37;
+      --purple: #8250df;
+      --yellow: #bf8700;
     }
     @media (prefers-color-scheme: dark) {
       :root {
         --text: #e6edf3;
         --muted: #9198a1;
         --bg: #0d1117;
+        --surface: #151b23;
+        --border: #3d444d;
         --accent: #4493f8;
+        --green: #3fb950;
+        --purple: #ab7df8;
+        --yellow: #d29922;
       }
     }
     body {
@@ -28,24 +38,178 @@
       background: var(--bg);
     }
     main {
-      max-width: 40rem;
+      max-width: 42rem;
       margin: 0 auto;
-      padding: 4rem 1.5rem;
+      padding: 4rem 1.25rem;
     }
     h1 { margin: 0 0 0.25rem; font-size: 2.5rem; }
-    .tagline { margin: 0 0 2rem; color: var(--muted); }
+    h2 { margin-top: 2.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.25rem; }
+    h3 { margin-bottom: 0.25rem; }
+    .tagline { margin: 0 0 0.5rem; color: var(--muted); font-size: 1.125rem; }
+    .meta { margin: 0 0 2rem; color: var(--muted); font-size: 0.875rem; }
     a { color: var(--accent); }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .card > :first-child { margin-top: 0; }
+    .card > :last-child { margin-bottom: 0; }
+    .moods { list-style: none; padding: 0; }
+    .moods li { display: flex; align-items: baseline; gap: 0.6rem; margin: 0.35rem 0; }
+    .dot {
+      flex: none;
+      width: 0.8rem; height: 0.8rem;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      transform: translateY(0.1rem);
+    }
+    .dot.green { background: var(--green); }
+    .dot.purple { background: var(--purple); }
+    .dot.yellow { background: var(--yellow); }
+    .dot.off { background: transparent; }
+    ol.steps { padding-left: 1.4rem; }
+    ol.steps li { margin: 0.6rem 0; }
+    .label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; }
+    .table-wrap { overflow-x: auto; }
     footer { margin-top: 3rem; font-size: 0.875rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <main>
-    <h1>Heya</h1>
-    <p class="tagline">A project for Building with AI, Fall 2026.</p>
+    <header>
+      <h1>Heya</h1>
+      <p class="tagline">A light-up bracelet that gets people off their screens and into real time with friends.</p>
+      <p class="meta">PRD v1 · Building with AI, Fall 2026</p>
+    </header>
 
-    <section>
-      <h2>About</h2>
-      <p>This page is the home for the project. Details coming soon.</p>
+    <section aria-labelledby="summary">
+      <h2 id="summary">Summary</h2>
+      <p>Heya is a slim bracelet with a one-button mood light and a companion app. You pick a mood, and friends nearby can see it glowing on your wrist:</p>
+      <ul class="moods">
+        <li><span class="dot green" aria-hidden="true"></span><span><strong>Green:</strong> "let's hang"</span></li>
+        <li><span class="dot purple" aria-hidden="true"></span><span><strong>Purple:</strong> "quiet company"</span></li>
+        <li><span class="dot yellow" aria-hidden="true"></span><span><strong>Yellow:</strong> "busy, but wave"</span></li>
+        <li><span class="dot off" aria-hidden="true"></span><span><strong>Off:</strong> not available</span></li>
+      </ul>
+      <p>As two friends walk toward each other, their bracelets glow warmer and then pulse together. When they meet, they tap bracelets to save the moment and build a streak. What the app does with that tap depends on who's wearing the bracelet:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Kids without phones</th><th scope="col">Gen Z and young adults with phones</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Who runs the app</th><td>A parent</td><td>The wearer</td></tr>
+            <tr><th scope="row">What a tap builds</th><td>A <strong>stats page</strong>: which friends you've tapped with, how often, and your streaks</td><td>A private <strong>map</strong> of the places you've hung out</td></tr>
+            <tr><th scope="row">Location</th><td>Parents can see where their kid is</td><td>Saved only at the moment of a tap and never shared</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="users">
+      <h2 id="users">Target users</h2>
+
+      <div class="card">
+        <p><span class="label">User 1: Kids without phones</span></p>
+        <p><strong>Grant, 7.</strong> Very social and always wants to be with his friends. He's too young for a phone, so every meetup has to go through a parent.</p>
+        <p><span class="label">Why him</span></p>
+        <p>His parents are the buyers, and they have two problems: they need to know where he is before they'll say yes to going out, and they want him off screens. The bracelet answers both, and tapping with friends turns his social energy into a game he actually wants to play.</p>
+      </div>
+
+      <div class="card">
+        <p><span class="label">User 2: Gen Z and young adults</span></p>
+        <p><strong>Faith, 30.</strong> Very social, always out and about in the city, and always happy to stop and say hi. Her friends live and work all over town, so they're often a few blocks apart without knowing it.</p>
+        <p><span class="label">Why her</span></p>
+        <p>She already wants to see people in person. What's missing is knowing when a friend is close by. She buys the bracelet for the fun of running into people, without sharing her location all day.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="workflow-change">
+      <h2 id="workflow-change">Before and after</h2>
+
+      <h3>Grant: Saturday morning</h3>
+      <p><span class="label">Before</span></p>
+      <ol class="steps">
+        <li>Grant wakes up wanting to play with friends and asks his mom, "Can I see Ava? Is Theo outside?"</li>
+        <li>She texts the other parents to set up a playdate. Replies take an hour, or never come.</li>
+        <li>At 7, he can't go to the playground alone, because no one can check where he is.</li>
+        <li>While he waits, he ends up on the tablet. The morning goes by with no friends at all.</li>
+      </ol>
+      <p><strong>The pain:</strong> Grant is a very social kid with no way to find his friends without an adult in the middle. His parents can choose freedom and worry, or safety and screens.</p>
+
+      <p><span class="label">After</span></p>
+      <ol class="steps">
+        <li>Grant presses his bracelet, and it glows <strong>green</strong>. His mom can see in her app that he's at the neighborhood playground.</li>
+        <li>Ava's bracelet is green too. As they get closer, both glow warmer, then pulse.</li>
+        <li>They tap bracelets, and their streak goes up to 6.</li>
+        <li>At dinner, Grant reads his stats page on his mom's phone: Ava is still at the top, and Theo is catching up.</li>
+      </ol>
+      <p><strong>The change:</strong> his parents get peace of mind without handing him a phone, and Grant gets a game he wins by going outside and finding his friends.</p>
+
+      <h3>Faith: a Saturday in the city</h3>
+      <p><span class="label">Before</span></p>
+      <ol class="steps">
+        <li>Faith is out running errands and grabbing coffee, and would love some company.</li>
+        <li>She texts a few friends: "anyone around?" Replies come in an hour later, after she's gone home.</li>
+        <li>Turning on constant location sharing would solve it, but having everyone see where she is all day feels like too much.</li>
+        <li>That evening, she sees a friend's story from a café two blocks from where she was sitting.</li>
+      </ol>
+      <p><strong>The pain:</strong> Faith is always down to say hi, but she only finds out about near misses afterward. The only fix today is sharing her location all the time.</p>
+
+      <p><span class="label">After</span></p>
+      <ol class="steps">
+        <li>Faith sets her bracelet to <strong>green</strong> and heads out without checking her phone.</li>
+        <li>As she walks past the farmers market, her bracelet starts glowing warmer. A friend is close by.</li>
+        <li>They spot each other, both bracelets pulse, and they tap, then grab a coffee together.</li>
+        <li>That night, "the farmers market" appears on her private map.</li>
+      </ol>
+      <p><strong>The change:</strong> near misses become chance meetups, and Faith never has to ask or share her location.</p>
+    </section>
+
+    <section aria-labelledby="core">
+      <h2 id="core">Core workflow (v1)</h2>
+      <p>v1 does exactly one thing well, the same way for both users: <strong>signal, find, tap.</strong></p>
+      <div class="card">
+        <ol class="steps">
+          <li><strong>Signal:</strong> one press cycles the mood: green, purple, yellow, off.</li>
+          <li><strong>Find:</strong> the bracelet detects paired friends' bracelets directly over short range. The glow warms as the signal gets stronger.</li>
+          <li><strong>Meet:</strong> at close range, both bracelets pulse in sync.</li>
+          <li><strong>Tap:</strong> touching bracelets records a mutual "hang" that needs both devices to confirm it. It updates the streak, then the kid's stats page (no phone) or the wearer's map (phone).</li>
+        </ol>
+        <p><strong>Done when:</strong> two friends can go from "both off" to a saved tap without either of them taking out a phone.</p>
+      </div>
+      <p>Friends are added only by tapping bracelets in person the first time, so the friend list is always people you've actually met.</p>
+    </section>
+
+    <section aria-labelledby="non-goals">
+      <h2 id="non-goals">Non-goals (v1)</h2>
+      <ol>
+        <li><strong>No messaging, feeds, or social content in the app.</strong> The app is for pairing, settings, streaks, the map, and stats. Adding chat would rebuild the screen time Heya exists to replace.</li>
+        <li><strong>No discovering strangers or public profiles.</strong> Bracelets react only to friends you've paired in person. There are no "people near you" features, ever.</li>
+        <li><strong>No sharing locations between friends.</strong> Friends never see where you are on a map, only your glow when they're physically nearby. Location tracking is only for a parent watching their own child's account, and adult wearers like Faith aren't tracked at all.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="open">
+      <h2 id="open">Open questions</h2>
+      <ul>
+        <li>How does a bracelet with no phone report its location to parents? Through built-in GPS and cellular, or through Wi-Fi/Bluetooth relays? This decides battery life, cost, and how slim the bracelet can be.</li>
+        <li>Where does Grant see his stats page: on a parent's phone, on a family tablet, or in a simple view on the bracelet itself?</li>
+        <li>Can a kid account turn into a phone account when the kid gets a phone, and does their tap history carry over?</li>
+      </ul>
     </section>
 
     <footer>
