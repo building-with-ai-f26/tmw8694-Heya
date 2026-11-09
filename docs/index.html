@@ -84,6 +84,15 @@
     th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
     th { color: var(--muted); font-weight: 600; }
     .table-wrap { overflow-x: auto; }
+    figure { margin: 1.25rem 0; }
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted); }
     footer { margin-top: 3rem; font-size: 0.875rem; color: var(--muted); }
   </style>
 </head>
@@ -192,6 +201,29 @@
         <p><strong>Done when:</strong> two friends can go from "both off" to a saved tap without either of them taking out a phone.</p>
       </div>
       <p>Friends are added only by tapping bracelets in person the first time, so the friend list is always people you've actually met.</p>
+    </section>
+
+    <section aria-labelledby="prototype">
+      <h2 id="prototype">Prototype</h2>
+      <p>A rough local prototype of the core workflow. Each bracelet has its own button, a slider sets how far apart the friends are, and tapping saves the hang. <a href="prototype.html">Try it yourself</a>.</p>
+
+      <figure>
+        <picture>
+          <source srcset="images/prototype-find-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="images/prototype-find-light.png" width="780" height="530" loading="lazy"
+            alt="Prototype screen: Grant's bracelet glows green for let's hang and Ava's glows purple for quiet company. They are 186 meters apart, and a few of Ava's purple lights have filled in on Grant's band. The status says Grant's band is 53% warm.">
+        </picture>
+        <figcaption><strong>Find:</strong> Ava is 186 m away. Ava's purple starts filling in on Grant's green band, and the glow warms as they get closer.</figcaption>
+      </figure>
+
+      <figure>
+        <picture>
+          <source srcset="images/prototype-tap-dark.png" media="(prefers-color-scheme: dark)">
+          <img src="images/prototype-tap-light.png" width="780" height="740" loading="lazy"
+            alt="Prototype screen after Grant and Ava tap bracelets side by side: both bands alternate green and purple, the status says Tapped, and Grant's stats show 8 hangs with Ava and a 6-day streak.">
+        </picture>
+        <figcaption><strong>Meet and tap:</strong> side by side, both bands pulse together. A tap saves the hang, and Grant's stats update to a 6-day streak with Ava.</figcaption>
+      </figure>
     </section>
 
     <section aria-labelledby="non-goals">
