@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Heya Prototype</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --text: #1f2328;
+      --muted: #59636e;
+      --bg: #ffffff;
+      --surface: #f6f8fa;
+      --border: #d1d9e0;
+      --accent: #0969da;
+      --accent-text: #ffffff;
+      --device: #16161b;
+      --device-edge: #3a3a42;
+      --led-off: #2e2e36;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e6edf3;
+        --muted: #9198a1;
+        --bg: #0d1117;
+        --surface: #151b23;
+        --border: #3d444d;
+        --accent: #4493f8;
+        --accent-text: #0d1117;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5;
+      color: var(--text);
+      background: var(--bg);
+    }
+    main { max-width: 56rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+    h1 { margin: 0; font-size: 2rem; }
+    h2 { margin: 0 0 0.75rem; font-size: 1.15rem; }
+    .lede { margin: 0.25rem 0 1.5rem; color: var(--muted); }
+    a { color: var(--accent); }
+
+    .tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    button {
+      font: inherit;
+      min-height: 44px;
+      padding: 0 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+    button[aria-pressed="true"], button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-text);
+      font-weight: 600;
+    }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .stage {
+      display: grid;
+      grid-template-columns: 1fr minmax(10rem, 1.2fr) 1fr;
+      gap: 1rem;
+      align-items: center;
+    }
+    @media (max-width: 40rem) {
+      .stage { grid-template-columns: 1fr 1fr; }
+      .between { grid-column: 1 / -1; order: 3; }
+    }
+    .wearer { text-align: center; }
+    .wearer .name { font-weight: 700; }
+    .wearer .mood { color: var(--muted); font-size: 0.9rem; min-height: 1.4em; }
+    .ring { width: 100%; max-width: 180px; height: auto; display: block; margin: 0.25rem auto 0.5rem; }
+    .between { display: flex; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .between label { font-weight: 600; }
+    .distance { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    input[type="range"] { width: 100%; accent-color: var(--accent); }
+    .scale { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); }
+
+    .status {
+      margin: 1rem 0 0;
+      padding: 0.75rem 1rem;
+      border-left: 4px solid var(--accent);
+      background: var(--bg);
+      border-radius: 6px;
+      min-height: 3.2em;
+    }
+    .actions { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-top: 1rem; }
+    .place { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+    select {
+      font: inherit; min-height: 44px; padding: 0 0.6rem; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg); color: var(--text);
+    }
+
+    .cols { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1rem; }
+    @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
+    .cols .panel { margin-bottom: 0; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; padding: 0.4rem 0.3rem; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+    .muted { color: var(--muted); }
+    .map { width: 100%; height: auto; display: block; border-radius: 8px; }
+    .log { margin: 0; padding-left: 1.2rem; font-size: 0.9rem; max-height: 16rem; overflow: auto; }
+    .log li { margin: 0.25rem 0; }
+    footer { margin-top: 2rem; font-size: 0.875rem; color: var(--muted); }
+
+    /* LED animations */
+    .breathe { animation: breathe 3.4s ease-in-out infinite; }
+    .sync { animation: sync 0.9s ease-in-out infinite; }
+    .chase { animation: chase 0.6s linear infinite; transform-box: view-box; transform-origin: 50% 50%; }
+    @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    @keyframes sync { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+    @keyframes chase { to { transform: rotate(60deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .breathe, .sync, .chase { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Heya prototype</h1>
+    <p class="lede">The core workflow from <a href="index.html">PRD v1</a>: <strong>signal, find, meet, tap.</strong> Set each bracelet's mood, drag the friends closer together, and tap when they meet.</p>
+
+    <div class="tabs" role="group" aria-label="Scenario">
+      <button type="button" id="tab-grant" aria-pressed="true">Grant (7, no phone)</button>
+      <button type="button" id="tab-faith" aria-pressed="false">Faith (30, phone)</button>
+    </div>
+
+    <section class="panel" aria-labelledby="stage-title">
+      <h2 id="stage-title">Bracelets</h2>
+      <div class="stage">
+        <div class="wearer" id="me"></div>
+        <div class="between">
+          <label for="dist" id="dist-label">Distance apart</label>
+          <div class="distance" id="dist-out" aria-hidden="true"></div>
+          <input type="range" id="dist" min="0" max="100" step="1" value="10">
+          <div class="scale" aria-hidden="true"><span>far</span><span>side by side</span></div>
+        </div>
+        <div class="wearer" id="friend"></div>
+      </div>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+
+      <div class="actions">
+        <button type="button" class="primary" id="tap">Tap bracelets</button>
+        <div class="place" id="place-wrap" hidden>
+          <label for="place" id="place-label"></label>
+          <select id="place"></select>
+        </div>
+      </div>
+    </section>
+
+    <div class="cols">
+      <section class="panel" aria-labelledby="result-title">
+        <h2 id="result-title"></h2>
+        <div id="result"></div>
+        <div class="actions">
+          <span class="muted" id="day-out"></span>
+          <button type="button" id="next-day">Next day</button>
+          <button type="button" id="reset">Reset</button>
+        </div>
+      </section>
+      <section class="panel" aria-labelledby="log-title">
+        <h2 id="log-title">Event log</h2>
+        <ol class="log" id="log" reversed></ol>
+      </section>
+    </div>
+
+    <footer>
+      Rough local prototype. Distances and colors are simulated; nothing is saved after you close the page.
+      · <a href="index.html">Back to PRD</a>
+    </footer>
+  </main>
+
+  <script>
+    const MOODS = [
+      { key: 'hang',  name: "Let's hang",     color: '#34D399' },
+      { key: 'quiet', name: 'Quiet company',  color: '#A78BFA' },
+      { key: 'wave',  name: 'Busy, but wave', color: '#FBBF24' },
+      { key: 'off',   name: 'Off',            color: null }
+    ];
+    const RANGE_M = 400;  // radio range: a few city blocks
+    const MEET_M = 3;     // "steps apart"
+    const LEDS = 12;
+
+    const SCENARIOS = {
+      grant: {
+        me: 'Grant', friend: 'Ava', phone: false,
+        resultTitle: "Grant's stats (on his mom's phone)",
+        places: null
+      },
+      faith: {
+        me: 'Faith', friend: 'Jo', phone: true,
+        resultTitle: "Faith's private map",
+        placeLabel: "Faith's phone says she's at",
+        places: [
+          { name: 'Farmers market', x: 70,  y: 60 },
+          { name: 'Corner café',    x: 190, y: 45 },
+          { name: 'Riverside park', x: 250, y: 130 },
+          { name: 'Bookstore',      x: 110, y: 140 }
+        ]
+      }
+    };
+
+    function freshState() {
+      return { meMood: 0, friendMood: 0, slider: 10, paired: false, day: 1,
+               hangs: [], streak: 0, lastTapDay: null, log: [] };
+    }
+    const states = { grant: freshState(), faith: freshState() };
+    let current = 'grant';
+    let celebrating = false;
+    let celebrateTimer = null;
+
+    const $ = id => document.getElementById(id);
+
+    // Slider is squared so the last few meters get most of the travel.
+    const distanceFor = s => Math.round(RANGE_M * 1.1 * Math.pow(1 - s / 100, 2));
+    const fmtDist = d => d >= RANGE_M ? `${d} m (out of range)` : `${d} m`;
+
+    function derive() {
+      const st = states[current];
+      const me = MOODS[st.meMood], friend = MOODS[st.friendMood];
+      const d = distanceFor(st.slider);
+      const bothOn = me.color && friend.color;
+      const inRange = st.paired && bothOn && d < RANGE_M;
+      const p = inRange ? 1 - d / RANGE_M : 0;  // 0 = edge of range, 1 = side by side
+      const meeting = bothOn && d <= MEET_M;
+      return { st, me, friend, d, bothOn, inRange, p, meeting: meeting && st.paired, canTap: meeting };
+    }
+
+    function ringSVG(label, ownColor, otherColor, p, mode) {
+      const cx = 90, cy = 90, r = 66;
+      const friendLeds = Math.round(p * LEDS / 2);
+      let leds = '';
+      for (let i = 0; i < LEDS; i++) {
+        const a = (i / LEDS) * Math.PI * 2 - Math.PI / 2;
+        const x = (cx + r * Math.cos(a)).toFixed(1), y = (cy + r * Math.sin(a)).toFixed(1);
+        let c;
+        if (!ownColor) c = 'var(--led-off)';
+        else if (mode === 'chase') c = i % 2 ? otherColor : ownColor;
+        else c = (i % 2 === 1 && (i - 1) / 2 < friendLeds) ? otherColor : ownColor;
+        leds += `<circle cx="${x}" cy="${y}" r="7" fill="${c}"/>`;
+      }
+      const glow = ownColor ? (0.25 + 0.75 * (mode ? 1 : p)).toFixed(2) : 0;
+      const cls = mode === 'chase' ? 'chase' : mode === 'sync' ? 'sync' : '';
+      return `
+        <svg class="ring" viewBox="0 0 180 180" role="img" aria-label="${label}">
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--device)" stroke-width="30"/>
+          <circle cx="${cx}" cy="${cy}" r="${r + 15}" fill="none" stroke="var(--device-edge)" stroke-width="1.5"/>
+          <g class="${cls}" style="filter: blur(9px)" opacity="${glow}">${leds}</g>
+          <g class="${cls}">${leds}</g>
+        </svg>`;
+    }
+
+    function wearerHTML(name, mood, other, p, mode, isMe) {
+      const modeText = mode === 'chase' ? 'saving the moment' : mode === 'sync' ? 'pulsing together' :
+        (p > 0 ? `${other.name.toLowerCase()} filling in, ${Math.round(p * 100)}% warm` : 'no friend nearby');
+      const label = `${name}'s bracelet: ${mood.color ? mood.name + ', ' + modeText : 'off, all lights dark'}`;
+      return `
+        <div class="name">${name}${isMe ? '' : ' (friend)'}</div>
+        ${ringSVG(label, mood.color, other.color, p, mode)}
+        <div class="mood">${mood.name}</div>
+        <button type="button" data-who="${isMe ? 'me' : 'friend'}"
+          aria-label="${name}'s bracelet button, now ${mood.name}. Press for next mood.">Press button</button>`;
+    }
+
+    function statusText(v, sc) {
+      const { st, me, friend, d, bothOn, inRange, p } = v;
+      if (celebrating) return `Tapped! Both bracelets are chasing ${sc.me}'s and ${sc.friend}'s colors.`;
+      if (!me.color) return `${sc.me}'s bracelet is off, so it's invisible: neither bracelet reacts to the other.`;
+      if (!friend.color) return `${sc.friend}'s bracelet is off, so ${sc.me} can't see it.`;
+      if (!st.paired) {
+        return d <= MEET_M
+          ? `Side by side, but not paired yet. Tap bracelets to pair. Friends can only be added in person.`
+          : `${sc.me} and ${sc.friend} aren't paired yet, so the bracelets ignore each other. Drag them together and tap to pair.`;
+      }
+      if (v.meeting) return `Steps apart! Both bracelets are pulsing together. Tap to save the moment.`;
+      if (inRange) return `${sc.friend} is about ${d} m away. ${sc.me}'s band is ${Math.round(p * 100)}% warm, with ${sc.friend}'s ${friend.name.toLowerCase()} color filling in.`;
+      return `${sc.friend} is out of range (${RANGE_M} m+). No glow yet.`;
+    }
+
+    function render() {
+      const sc = SCENARIOS[current];
+      const v = derive();
+      const mode = celebrating ? 'chase' : v.meeting ? 'sync' : null;
+
+      $('tab-grant').setAttribute('aria-pressed', current === 'grant');
+      $('tab-faith').setAttribute('aria-pressed', current === 'faith');
+      $('me').innerHTML = wearerHTML(sc.me, v.me, v.friend, v.p, mode, true);
+      $('friend').innerHTML = wearerHTML(sc.friend, v.friend, v.me, v.p, mode, false);
+      if (!mode) { // purple breathes when idle
+        if (v.me.key === 'quiet') $('me').querySelectorAll('g').forEach(g => g.classList.add('breathe'));
+        if (v.friend.key === 'quiet') $('friend').querySelectorAll('g').forEach(g => g.classList.add('breathe'));
+      }
+
+      $('dist').value = v.st.slider;
+      $('dist-label').textContent = `Distance between ${sc.me} and ${sc.friend}`;
+      $('dist-out').textContent = fmtDist(v.d);
+      $('dist').setAttribute('aria-valuetext', fmtDist(v.d));
+      $('status').textContent = statusText(v, sc);
+      $('tap').disabled = !v.canTap || celebrating;
+      $('tap').textContent = v.st.paired ? 'Tap bracelets' : 'Tap to pair';
+
+      $('place-wrap').hidden = !sc.phone;
+      if (sc.phone) {
+        $('place-label').textContent = sc.placeLabel;
+        if ($('place').options.length !== sc.places.length) {
+          $('place').innerHTML = sc.places.map((pl, i) => `<option value="${i}">${pl.name}</option>`).join('');
+        }
+      }
+
+      $('result-title').textContent = sc.resultTitle;
+      $('result').innerHTML = sc.phone ? mapHTML(v.st, sc) : statsHTML(v.st, sc);
+      $('day-out').textContent = `Day ${v.st.day}`;
+      $('log').innerHTML = v.st.log.slice().reverse().map(e => `<li>${e}</li>`).join('') ||
+        '<li class="muted">Nothing yet.</li>';
+    }
+
+    function statsHTML(st, sc) {
+      if (!st.hangs.length) return `<p class="muted">No taps yet. ${sc.me}'s friends will show up here after he taps with them.</p>`;
+      return `
+        <table>
+          <thead><tr><th scope="col">Friend</th><th scope="col">Hangs</th><th scope="col">Streak</th><th scope="col">Last</th></tr></thead>
+          <tbody><tr>
+            <td>${sc.friend}</td><td>${st.hangs.length}</td>
+            <td>${st.streak} day${st.streak === 1 ? '' : 's'}</td><td>Day ${st.lastTapDay}</td>
+          </tr></tbody>
+        </table>
+        <p class="muted">No locations here: friends and counts only.</p>`;
+    }
+
+    function mapHTML(st, sc) {
+      const counts = sc.places.map(() => 0);
+      st.hangs.forEach(h => counts[h.place]++);
+      const pins = sc.places.map((pl, i) => counts[i] ? `
+        <circle cx="${pl.x}" cy="${pl.y}" r="${8 + 2 * counts[i]}" fill="var(--accent)" opacity="0.85"/>
+        <text x="${pl.x}" y="${pl.y - 14 - 2 * counts[i]}" text-anchor="middle" font-size="11" fill="currentColor">${pl.name} ×${counts[i]}</text>` : '').join('');
+      const streets = [40, 90, 140].map(y => `<line x1="0" y1="${y}" x2="320" y2="${y}"/>`).join('') +
+        [60, 140, 220, 300].map(x => `<line x1="${x}" y1="0" x2="${x}" y2="180"/>`).join('');
+      const list = st.hangs.length
+        ? `<p>${st.hangs.length} hang${st.hangs.length === 1 ? '' : 's'} with ${sc.friend} · streak ${st.streak} day${st.streak === 1 ? '' : 's'}</p>`
+        : `<p class="muted">No taps yet. Places show up only where ${sc.me} actually taps with a friend.</p>`;
+      return `
+        <svg class="map" viewBox="0 0 320 180" role="img" aria-label="Map of places ${sc.me} has tapped with friends">
+          <rect width="320" height="180" fill="var(--bg)"/>
+          <g stroke="var(--border)" stroke-width="6">${streets}</g>
+          <path d="M0 165 C 90 150, 200 175, 320 158" fill="none" stroke="var(--accent)" stroke-opacity="0.25" stroke-width="10"/>
+          ${pins}
+        </svg>${list}`;
+    }
+
+    function addLog(st, text) { st.log.push(`Day ${st.day}: ${text}`); }
+
+    function tap() {
+      const v = derive();
+      if (!v.canTap || celebrating) return;
+      const st = v.st, sc = SCENARIOS[current];
+      const firstTime = !st.paired;
+      st.paired = true;
+      st.streak = st.lastTapDay === st.day ? st.streak
+                : st.lastTapDay === st.day - 1 ? st.streak + 1 : 1;
+      st.lastTapDay = st.day;
+      const hang = { day: st.day };
+      if (sc.phone) hang.place = Number($('place').value);
+      st.hangs.push(hang);
+      const where = sc.phone ? ` at ${sc.places[hang.place].name}` : '';
+      addLog(st, firstTime
+        ? `${sc.me} and ${sc.friend} paired in person${where}. Bracelets will react to each other from now on.`
+        : `Tapped with ${sc.friend}${where}. Streak: ${st.streak}.`);
+
+      celebrating = true;
+      clearTimeout(celebrateTimer);
+      celebrateTimer = setTimeout(() => { celebrating = false; render(); }, 2400);
+      render();
+    }
+
+    document.addEventListener('click', e => {
+      const b = e.target.closest('button[data-who]');
+      if (!b) return;
+      const st = states[current], key = b.dataset.who === 'me' ? 'meMood' : 'friendMood';
+      st[key] = (st[key] + 1) % MOODS.length;
+      const sc = SCENARIOS[current];
+      addLog(st, `${b.dataset.who === 'me' ? sc.me : sc.friend} set mood to ${MOODS[st[key]].name}.`);
+      render();
+      // keep focus on the same bracelet button after re-render
+      document.querySelector(`button[data-who="${b.dataset.who}"]`).focus();
+    });
+    $('dist').addEventListener('input', e => { states[current].slider = Number(e.target.value); render(); });
+    $('tap').addEventListener('click', tap);
+    $('next-day').addEventListener('click', () => {
+      const st = states[current]; st.day++; addLog(st, 'New day.'); render();
+    });
+    $('reset').addEventListener('click', () => { states[current] = freshState(); celebrating = false; render(); });
+    $('tab-grant').addEventListener('click', () => { current = 'grant'; celebrating = false; render(); });
+    $('tab-faith').addEventListener('click', () => { current = 'faith'; celebrating = false; render(); });
+
+    render();
+  </script>
+</body>
+</html>
