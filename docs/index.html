@@ -226,6 +226,76 @@
       </figure>
     </section>
 
+    <section aria-labelledby="build1">
+      <h2 id="build1">Build 1 log</h2>
+      <p class="meta">November 9, 2026 · commits <code>f599bbf</code> to <code>3175cb1</code></p>
+
+      <h3>What works</h3>
+      <ul>
+        <li><strong>The full core workflow runs end to end</strong> in <a href="prototype.html">the prototype</a>: signal, then find, then meet, then tap, for both Grant (no phone, stats page) and Faith (phone, private map).</li>
+        <li><strong>25 of 25 automated checks pass</strong> in headless Chrome. They cover:
+          <ul>
+            <li>Unpaired bracelets ignore each other.</li>
+            <li>The first tap in person pairs the bracelets.</li>
+            <li>Closer means warmer (73% at 110 m, 96% at 18 m).</li>
+            <li>Bracelets out of range don't glow.</li>
+            <li>A tap is blocked when either bracelet is off.</li>
+            <li>Streak rules: same day stays the same, next day goes up by one, a skipped day resets it to 1.</li>
+            <li>Faith's map pins.</li>
+            <li>Each scenario keeps its own progress, and Reset clears it.</li>
+          </ul>
+        </li>
+        <li><strong>The layout works at phone width (360 px)</strong> with no sideways scrolling, and in both light and dark mode. I checked this with screenshots.</li>
+      </ul>
+
+      <h3>What I learned</h3>
+      <ul>
+        <li><strong>The earlier Claude Design prototype never tested the main idea.</strong> I read its code against the core workflow. The mood button worked, but "glow warms as a friend gets closer" and "both bracelets pulse together" existed only as description text, and none of its three frames simulated them. The part of Heya that makes it different hadn't been prototyped at all.</li>
+        <li><strong>Brightness that changes evenly with distance mostly happens out of sight.</strong> With warmth based directly on distance over a 400 m range, the band is already 92% warm at 34 m. Nearly all the change happens blocks away, and almost none happens at the walking-up-to-someone distance where it should feel exciting. The next build should save most of the change for the last stretch.</li>
+        <li><strong>The hardware sketch can't support the parent promise.</strong> The Heya Band design's pod holds LoRa, Bluetooth, a battery and charging contacts, but no GPS or cellular. Showing parents where Grant is needs a way to get his location out of the bracelet that doesn't exist yet. It's the biggest open question.</li>
+        <li><strong>Pairing only in person has a side effect.</strong> The first meetup between two friends can't use Heya at all, because their bracelets ignore each other until that first tap.</li>
+      </ul>
+
+      <h3>What broke or changed</h3>
+      <ul>
+        <li><strong>Bugs in the earlier prototype</strong>, all fixed in this build:
+          <ul>
+            <li>Tapping worked even when a bracelet was off.</li>
+            <li>The friend always showed in a fixed blue that isn't one of the mood colors.</li>
+            <li>Tapping twice quickly cut the second animation short.</li>
+          </ul>
+        </li>
+        <li><strong>Scope changed during the build.</strong> Parent location tracking for kids without phones became a feature. That contradicted the original non-goal "no location tracking," so I rewrote that non-goal as "no sharing locations between friends." The second user group became "Gen Z and young adults," since Faith is 30.</li>
+        <li><strong>Problems with my own build and tests:</strong>
+          <ul>
+            <li>An empty place dropdown showed up in Grant's mode, because a CSS rule overrode <code>hidden</code>.</li>
+            <li>4 checks failed at first because my test patterns didn't allow for whitespace in the generated HTML. The prototype was fine; I fixed the tests.</li>
+          </ul>
+        </li>
+        <li><strong>Problems taking screenshots:</strong>
+          <ul>
+            <li>Chrome's dark-mode flags didn't apply reliably, so the dark screenshots force dark mode in the page itself.</li>
+            <li>A fresh browser profile hung on launch.</li>
+            <li>macOS has no <code>timeout</code> command, so a run that looked like it was hanging had actually never started.</li>
+          </ul>
+        </li>
+        <li><strong>Plan changed:</strong> I meant to make a GIF, but no GIF tools were installed. Then the "meet" and "tap" screenshots looked the same as stills, so the page shows two screenshots instead of three.</li>
+      </ul>
+
+      <h3>Costs</h3>
+      <ul>
+        <li><strong>$0 out of pocket.</strong> No hardware was bought, no paid APIs were called, and the page is plain HTML hosted from <code>docs/</code>.</li>
+        <li><strong>AI tools:</strong> Claude Code (Opus 5.5) and Claude Design on claude.ai. No usage-based charges were tracked for this build, and the subscription cost isn't counted here.</li>
+        <li><strong>Hardware has not been costed.</strong> A version with GPS and cellular for parent tracking would add parts and a monthly data cost, which isn't estimated yet.</li>
+      </ul>
+
+      <h3>Hours</h3>
+      <ul>
+        <li><strong>Build 1 (Nov 9):</strong> about 1 hour in a single session, with commits from 11:24 to 11:37 ET. It covered the PRD, reviewing the old prototype, the new prototype with tests, and the screenshots.</li>
+        <li><strong>Earlier work:</strong> the Claude Design prototype and build guide (Oct 27–29), and repo setup (Nov 5). Time for these wasn't tracked.</li>
+      </ul>
+    </section>
+
     <section aria-labelledby="non-goals">
       <h2 id="non-goals">Non-goals (v1)</h2>
       <ol>
