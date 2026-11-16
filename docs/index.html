@@ -4,6 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Heya: PRD v1</title>
+  <!-- PostHog analytics. The project key is public by design (it only allows sending events). -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_zew2vtx2G9NL7fZKyZNECpH54FhEgPSaQ6u8Br9eGXCf', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      persistence: 'localStorage'
+    });
+    posthog.register({ heya_page: document.title, heya_local: location.protocol === 'file:' });
+  </script>
   <style>
     :root {
       color-scheme: light dark;
@@ -46,7 +56,28 @@
     h2 { margin-top: 2.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.25rem; }
     h3 { margin-bottom: 0.25rem; }
     .tagline { margin: 0 0 0.5rem; color: var(--muted); font-size: 1.125rem; }
-    .meta { margin: 0 0 2rem; color: var(--muted); font-size: 0.875rem; }
+    .meta { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.875rem; }
+    .button {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .button:hover { filter: brightness(1.1); }
+    .button:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+    .notice {
+      margin: 1.25rem 0 2rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .notice strong { color: var(--text); }
     a { color: var(--accent); }
     .card {
       background: var(--surface);
@@ -102,6 +133,8 @@
       <h1>Heya</h1>
       <p class="tagline">A light-up bracelet that gets people off their screens and into real time with friends.</p>
       <p class="meta">PRD v1 · Building with AI, Fall 2026</p>
+      <a class="button" id="demo-button" href="prototype.html">Try the prototype</a>
+      <p class="notice" role="note"><strong>Heads up, testers:</strong> this page uses PostHog to record your visit, what you click, and a session replay (a playback of your mouse movements and clicks) so I can see how people use Heya. Anything typed into form fields is hidden, and no names or emails are collected.</p>
     </header>
 
     <section aria-labelledby="summary">

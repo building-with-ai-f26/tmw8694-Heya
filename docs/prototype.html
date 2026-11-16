@@ -4,6 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Heya Prototype</title>
+  <!-- PostHog analytics. The project key is public by design (it only allows sending events). -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_zew2vtx2G9NL7fZKyZNECpH54FhEgPSaQ6u8Br9eGXCf', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      persistence: 'localStorage'
+    });
+    posthog.register({ heya_page: document.title, heya_local: location.protocol === 'file:' });
+  </script>
   <style>
     :root {
       color-scheme: light dark;
@@ -119,6 +129,8 @@
     .map { width: 100%; height: auto; display: block; border-radius: 8px; }
     .log { margin: 0; padding-left: 1.2rem; font-size: 0.9rem; max-height: 16rem; overflow: auto; }
     .log li { margin: 0.25rem 0; }
+    .notice { margin: -0.5rem 0 1.5rem; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: 0.875rem; color: var(--muted); }
+    .notice strong { color: var(--text); }
     footer { margin-top: 2rem; font-size: 0.875rem; color: var(--muted); }
 
     /* LED animations */
@@ -137,6 +149,7 @@
   <main>
     <h1>Heya prototype</h1>
     <p class="lede">The core workflow from <a href="index.html">PRD v1</a>: <strong>signal, find, meet, tap.</strong> Set each bracelet's mood, drag the friends closer together, and tap when they meet.</p>
+    <p class="notice" role="note"><strong>Heads up, testers:</strong> this page uses PostHog to record your visit, what you click, and a session replay (a playback of your mouse movements and clicks) so I can see how people use Heya. Anything typed into form fields is hidden, and no names or emails are collected.</p>
 
     <div class="tabs" role="group" aria-label="Scenario">
       <button type="button" id="tab-grant" aria-pressed="true">Grant (7, no phone)</button>
@@ -229,6 +242,10 @@
     let celebrateTimer = null;
 
     const $ = id => document.getElementById(id);
+    // Send a named event to PostHog; does nothing if PostHog didn't load.
+    const track = (name, props = {}) => {
+      try { window.posthog && posthog.capture(name, { scenario: current, ...props }); } catch (e) {}
+    };
 
     // Slider is squared so the last few meters get most of the travel.
     const distanceFor = s => Math.round(RANGE_M * 1.1 * Math.pow(1 - s / 100, 2));
@@ -385,6 +402,11 @@
         ? `${sc.me} and ${sc.friend} paired in person${where}. Bracelets will react to each other from now on.`
         : `Tapped with ${sc.friend}${where}. Streak: ${st.streak}.`);
 
+      track(firstTime ? 'bracelets_paired' : 'bracelets_tapped', {
+        hangs: st.hangs.length, streak: st.streak, day: st.day,
+        place: sc.phone ? sc.places[hang.place].name : null
+      });
+
       celebrating = true;
       clearTimeout(celebrateTimer);
       celebrateTimer = setTimeout(() => { celebrating = false; render(); }, 2400);
@@ -398,6 +420,7 @@
       st[key] = (st[key] + 1) % MOODS.length;
       const sc = SCENARIOS[current];
       addLog(st, `${b.dataset.who === 'me' ? sc.me : sc.friend} set mood to ${MOODS[st[key]].name}.`);
+      track('mood_changed', { who: b.dataset.who, mood: MOODS[st[key]].key });
       render();
       // keep focus on the same bracelet button after re-render
       document.querySelector(`button[data-who="${b.dataset.who}"]`).focus();
@@ -405,11 +428,11 @@
     $('dist').addEventListener('input', e => { states[current].slider = Number(e.target.value); render(); });
     $('tap').addEventListener('click', tap);
     $('next-day').addEventListener('click', () => {
-      const st = states[current]; st.day++; addLog(st, 'New day.'); render();
+      const st = states[current]; st.day++; addLog(st, 'New day.'); track('next_day', { day: st.day }); render();
     });
-    $('reset').addEventListener('click', () => { states[current] = freshState(); celebrating = false; render(); });
-    $('tab-grant').addEventListener('click', () => { current = 'grant'; celebrating = false; render(); });
-    $('tab-faith').addEventListener('click', () => { current = 'faith'; celebrating = false; render(); });
+    $('reset').addEventListener('click', () => { track('prototype_reset'); states[current] = freshState(); celebrating = false; render(); });
+    $('tab-grant').addEventListener('click', () => { current = 'grant'; track('scenario_switched'); celebrating = false; render(); });
+    $('tab-faith').addEventListener('click', () => { current = 'faith'; track('scenario_switched'); celebrating = false; render(); });
 
     render();
   </script>
