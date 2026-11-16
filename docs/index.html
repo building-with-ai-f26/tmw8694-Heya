@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Heya: PRD v1</title>
+  <title>Heya: PRD v2</title>
   <!-- PostHog analytics. The project key is public by design (it only allows sending events). -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -123,6 +123,7 @@
       border: 1px solid var(--border);
       border-radius: 8px;
     }
+    h3 { margin-top: 1.75rem; }
     figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted); }
     footer { margin-top: 3rem; font-size: 0.875rem; color: var(--muted); }
   </style>
@@ -132,13 +133,73 @@
     <header>
       <h1>Heya</h1>
       <p class="tagline">A light-up bracelet that gets people off their screens and into real time with friends.</p>
-      <p class="meta">PRD v1 · Building with AI, Fall 2026</p>
+      <p class="meta">PRD v2 · Building with AI, Fall 2026 · <a href="#prd2">PRD v2</a> · <a href="#summary">PRD v1</a></p>
       <a class="button" id="demo-button" href="prototype.html">Try the prototype</a>
       <p class="notice" role="note"><strong>Heads up, testers:</strong> this page uses PostHog to record your visit, what you click, and a session replay (a playback of your mouse movements and clicks) so I can see how people use Heya. Anything typed into form fields is hidden, and no names or emails are collected.</p>
     </header>
 
+    <section aria-labelledby="prd2">
+      <h2 id="prd2">PRD v2: Heya Wrapped</h2>
+      <p class="meta">Build 2 · November 2026 · supersedes the v1 sections below where they differ</p>
+      <p>Build 2 adds the stats pages from the PRD as <strong>Heya Wrapped</strong>: a year of bracelet taps, written up as a short story you hop through like a hopscotch. There are two versions, one per user:</p>
+      <ul>
+        <li><strong>Grant (7, no phone)</strong> reads his Wrapped with a parent in the Heya Family app. It shows friends and taps only: no locations, no sharing.</li>
+        <li><strong>Faith (30)</strong> gets a map of where she tapped, her top friends, and a chalk-drawn image she can share.</li>
+      </ul>
+
+      <h3>Biggest risk</h3>
+      <p><strong>The tapping habit fades once the bracelet stops being new.</strong> Heya only works if friends keep tapping when they meet. If a tap feels pointless after the first few weeks, Grant stops tapping, his parents stop seeing value, and Faith never shares anything that brings new people in.</p>
+      <p>The hardware question from Build 1 (how a bracelet with no phone shares a location with parents) is still open, but it's a cost and engineering problem. This risk is about whether people want the product at all, so it comes first.</p>
+
+      <h3>How this build tests it</h3>
+      <p>Wrapped is the payoff for tapping. If looking back at a year of real-life hangouts feels rewarding, tapping has a reason to continue. This build puts a working Wrapped in front of testers and measures what they do with it in PostHog:</p>
+      <ul>
+        <li><strong>Do they finish it?</strong> The share of <code>wrapped_generated</code> runs that reach the last square (<code>wrapped_completed</code>).</li>
+        <li><strong>Do they explore?</strong> <code>hopscotch_hop</code> and <code>wrapped_card_viewed</code> show whether people jump around or just click Next.</li>
+        <li><strong>Would adults share it?</strong> <code>wrapped_shared</code> and <code>caption_copied</code> on Faith's version.</li>
+        <li><strong>What do they say?</strong> I'll ask each tester one question afterward: "Would this make you want to tap more?"</li>
+      </ul>
+      <p><strong>Pass bar:</strong> at least 6 in 10 testers reach the last square, and at least 1 in 4 who see Faith's version press Share. Results will go in the Build 2 log; there is no tester data yet.</p>
+
+      <h3>How the app works</h3>
+      <p>One full user action, start to finish, running on my laptop (<code>app/</code> in the repo; setup is in <code>AGENTS.md</code>):</p>
+      <ol>
+        <li>The tester picks Grant or Faith and presses <strong>Make my Wrapped</strong>.</li>
+        <li>The local Python server reads that person's tap history and <strong>calculates every number itself</strong>: top friends, longest streak, moods, busiest month and, for Faith only, top places.</li>
+        <li>The server sends only those numbers to <strong>Claude Haiku 5.5 through OpenRouter</strong>, a real AI call. The API key stays on the server and never reaches the browser. The prompt allows the AI to write words only: no new numbers, no invented details, no pronoun guesses, and kid-friendly wording for Grant. Grant's data never includes locations.</li>
+        <li>The server checks the reply (every card present, valid JSON) and sends it back. If the AI skips Faith's share caption, the server builds one from the real stats.</li>
+        <li>The page draws six chalk cards on a hopscotch. Each card's color is the real mood behind it (green = Let's hang). Faith also gets the map and a shareable image.</li>
+        <li>PostHog records each step: the request, the result with its cost, every card viewed, hops, and shares.</li>
+      </ol>
+
+      <figure>
+        <img src="images/wrapped-grant.jpg" width="1920" height="1440" loading="lazy"
+          alt="Heya Wrapped for Grant on light concrete: a hopscotch of numbered chalk squares on the left with square 3 filled green, and a green chalk card showing twelve tally marks and '12 days in a row, Jul 3 to Jul 14, Ava was there for 10 of them', with the AI-written headline and text below. A side panel says Grant's Wrapped stays in the family app, and a run line shows the model, tokens, a cost of $0.00030 and 2.6 seconds.">
+        <figcaption><strong>Grant, square 3:</strong> a real AI run. The tally marks and numbers come from the server, the words from the AI. Family-only: no map, no share button.</figcaption>
+      </figure>
+      <figure>
+        <img src="images/wrapped-faith.jpg" width="1920" height="2070" loading="lazy"
+          alt="Heya Wrapped for Faith in dark mode: a green chalk card with 'Jo' circled as her number one friend with 42 taps, a dark map of New York with circles where she tapped colored by mood, and a share image drawn as a chalk hopscotch on asphalt with her year's highlights in the squares.">
+        <figcaption><strong>Faith, square 2:</strong> her #1 friend, a map of where she tapped (the color is her mood there), and the chalk hopscotch image she can share.</figcaption>
+      </figure>
+
+      <h3>Cost per run</h3>
+      <p>Each Wrapped makes <strong>one</strong> AI call. Measured over about 30 real runs on November 16:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col"></th><th scope="col">Grant (kid)</th><th scope="col">Faith (adult)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Tokens in / out</th><td>about 1,100 / 380</td><td>about 1,500 / 480</td></tr>
+            <tr><th scope="row">Cost per run</th><td>about $0.0003</td><td>about $0.0004</td></tr>
+            <tr><th scope="row">Time</th><td>2.0–2.7 s</td><td>2.4–3.0 s</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>That works out to roughly <strong>2,500–3,500 Wrapped runs per dollar</strong>, at OpenRouter's price of $0.10 per million input tokens and $0.50 per million output tokens. One Wrapped per user per year for 10,000 users would cost about <strong>$4</strong>. The cost doesn't change the decision; whether people want it does.</p>
+    </section>
+
     <section aria-labelledby="summary">
-      <h2 id="summary">Summary</h2>
+      <h2 id="summary">PRD v1: Summary</h2>
       <p>Heya is a slim bracelet with a one-button mood light and a companion app. You pick a mood, and friends nearby can see it glowing on your wrist:</p>
       <ul class="moods">
         <li><span class="dot green" aria-hidden="true"></span><span><strong>Green:</strong> "let's hang"</span></li>
