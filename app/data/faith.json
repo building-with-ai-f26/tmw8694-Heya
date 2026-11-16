@@ -1,0 +1,840 @@
+{
+ "wearer": "Faith",
+ "age": 30,
+ "type": "adult",
+ "year": 2026,
+ "through": "2026-11-15",
+ "places": {
+  "Prospect Park": {
+   "lat": 40.6602,
+   "lng": -73.969
+  },
+  "Union Square Greenmarket": {
+   "lat": 40.7359,
+   "lng": -73.9911
+  },
+  "McCarren Park": {
+   "lat": 40.7206,
+   "lng": -73.9516
+  },
+  "Brooklyn Bridge Park": {
+   "lat": 40.7003,
+   "lng": -73.9967
+  },
+  "Housing Works Bookstore": {
+   "lat": 40.7247,
+   "lng": -73.9967
+  },
+  "Washington Square Park": {
+   "lat": 40.7308,
+   "lng": -73.9973
+  }
+ },
+ "taps": [
+  {
+   "date": "2026-01-02",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-01-09",
+   "friend": "Jo",
+   "place": "McCarren Park",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-01-12",
+   "friend": "Jo",
+   "place": "McCarren Park",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-01-16",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-01-17",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-01-18",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-01-24",
+   "friend": "Sam",
+   "place": "Washington Square Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-02-21",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-02-27",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "wave",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-03-01",
+   "friend": "Dee",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-03-02",
+   "friend": "Sam",
+   "place": "Housing Works Bookstore",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-03-04",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-03-08",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-03-14",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-03-16",
+   "friend": "Marcus",
+   "place": "Brooklyn Bridge Park",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-03-20",
+   "friend": "Jo",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-03-22",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-03-30",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-03-31",
+   "friend": "Sam",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-04-04",
+   "friend": "Priya",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-04-10",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-04-11",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-04-12",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-04-17",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-04-18",
+   "friend": "Jo",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-04-21",
+   "friend": "Marcus",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-04-24",
+   "friend": "Marcus",
+   "place": "Washington Square Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-04-25",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-05-02",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-05-05",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-11",
+   "friend": "Sam",
+   "place": "Union Square Greenmarket",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-05-12",
+   "friend": "Sam",
+   "place": "McCarren Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-14",
+   "friend": "Jo",
+   "place": "Housing Works Bookstore",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-05-15",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-16",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-05-17",
+   "friend": "Sam",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-05-18",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-19",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-05-20",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-21",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-22",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-23",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-05-26",
+   "friend": "Dee",
+   "place": "McCarren Park",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-05-29",
+   "friend": "Priya",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-05-30",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-06-01",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-06-05",
+   "friend": "Dee",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-06-06",
+   "friend": "Sam",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-06-07",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-06-12",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-06-13",
+   "friend": "Jo",
+   "place": "Brooklyn Bridge Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-06-21",
+   "friend": "Priya",
+   "place": "Housing Works Bookstore",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-06-22",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-06-25",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-06-27",
+   "friend": "Sam",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-06-28",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-06-30",
+   "friend": "Priya",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-07-01",
+   "friend": "Sam",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-07-07",
+   "friend": "Jo",
+   "place": "Brooklyn Bridge Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-07-10",
+   "friend": "Dee",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-07-11",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-07-12",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-07-19",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-07-22",
+   "friend": "Dee",
+   "place": "Union Square Greenmarket",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-07-25",
+   "friend": "Marcus",
+   "place": "Washington Square Park",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-07-29",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-07-31",
+   "friend": "Sam",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-08-02",
+   "friend": "Priya",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-05",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-07",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-08-14",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-15",
+   "friend": "Dee",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-17",
+   "friend": "Sam",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-22",
+   "friend": "Priya",
+   "place": "Brooklyn Bridge Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-23",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-24",
+   "friend": "Marcus",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-08-26",
+   "friend": "Dee",
+   "place": "Brooklyn Bridge Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-08-29",
+   "friend": "Marcus",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-08-30",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "quiet",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-08-31",
+   "friend": "Sam",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-09-05",
+   "friend": "Dee",
+   "place": "Brooklyn Bridge Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-06",
+   "friend": "Marcus",
+   "place": "Washington Square Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-08",
+   "friend": "Dee",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-09-09",
+   "friend": "Dee",
+   "place": "Union Square Greenmarket",
+   "my_mood": "wave",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-09-11",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-12",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-16",
+   "friend": "Priya",
+   "place": "Brooklyn Bridge Park",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-09-18",
+   "friend": "Priya",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-20",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-23",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-09-25",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-09-26",
+   "friend": "Dee",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-27",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-09-28",
+   "friend": "Priya",
+   "place": "Washington Square Park",
+   "my_mood": "hang",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-10-04",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-10-06",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-10-08",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-10-09",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-10-11",
+   "friend": "Priya",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-10-13",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "quiet",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-10-16",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-10-17",
+   "friend": "Jo",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-10-18",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-10-21",
+   "friend": "Priya",
+   "place": "Union Square Greenmarket",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-10-23",
+   "friend": "Marcus",
+   "place": "Washington Square Park",
+   "my_mood": "wave",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-10-24",
+   "friend": "Priya",
+   "place": "Washington Square Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-10-27",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "quiet",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-10-30",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-10-31",
+   "friend": "Marcus",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-11-01",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-11-07",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "hang",
+   "friend_mood": "wave"
+  },
+  {
+   "date": "2026-11-08",
+   "friend": "Jo",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-11-10",
+   "friend": "Jo",
+   "place": "Housing Works Bookstore",
+   "my_mood": "quiet",
+   "friend_mood": "hang"
+  },
+  {
+   "date": "2026-11-14",
+   "friend": "Marcus",
+   "place": "McCarren Park",
+   "my_mood": "wave",
+   "friend_mood": "quiet"
+  },
+  {
+   "date": "2026-11-15",
+   "friend": "Priya",
+   "place": "Prospect Park",
+   "my_mood": "wave",
+   "friend_mood": "quiet"
+  }
+ ]
+}
