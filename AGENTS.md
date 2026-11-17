@@ -9,7 +9,7 @@ Guidance for AI coding agents (and people) working in this repository.
 - **Repo:** https://github.com/building-with-ai-f26/tmw8694-Heya
 - **Product page:** https://building-with-ai-f26.github.io/tmw8694-Heya/ (GitHub Pages, served from `docs/` on `main`)
 - **Current priorities:** `ROADMAP.md` (Xcode proximity spike first; bracelet vs. phone/watch question).
-- **Product truth:** `PRODUCT.md` (users, purpose, privacy rules). **Visual system** for the Wrapped app: `DESIGN.md`.
+- **Product truth:** `PRODUCT.md` (users, purpose, privacy rules). **Visual system:** `DESIGN.md`. Heya's look is the iPhone app's (black ground, cards, metal LED ring, mood pills, pixel avatars, SF Pro); the product page uses it. The Wrapped app still uses the Sidewalk Chalk section until it's restyled.
 
 ## Structure
 
@@ -18,6 +18,7 @@ Guidance for AI coding agents (and people) working in this repository.
 | `docs/index.html` | Product page and PRD (v2 on top, v1 below). Static HTML and inline CSS, no build step. |
 | `docs/prototype.html` | Build 1 bracelet prototype: signal → find → meet → tap. Static, runs from the file. |
 | `docs/images/` | Screenshots used on the product page. |
+| `docs/fonts/` | Self-hosted Inter (SIL Open Font License, `OFL.txt`): the product page's fallback for SF Pro on Windows and Android. |
 | `app/server.py` | Heya Wrapped local server (Python standard library only). Serves the app, computes stats, makes the AI call. |
 | `app/index.html` | Heya Wrapped page: Grant (kid) and Faith (adult) recaps, hopscotch navigation, map, share image. |
 | `app/data/grant.json`, `app/data/faith.json` | Demo tap history (fictional people, Jan 1 – Nov 15, 2026). |
@@ -76,11 +77,11 @@ Pick an iPhone simulator and press Run. The build copies `.env` into the app so 
 
 - The PostHog web snippet is in the `<head>` of `docs/index.html`, `docs/prototype.html` and `app/index.html`. It uses the **public project token** (`phc_…`) and the US host. Never use a personal API key in client code.
 - Pageviews, autocaptured clicks and session replay are on. Every page shows a "Heads up, testers" notice; keep it.
-- Named events: the prototype sends `mood_changed`, `bracelets_paired`, `bracelets_tapped`, `next_day`, `scenario_switched` and `prototype_reset`. Wrapped sends `wrapped_requested`, `wrapped_generated` (with cost), `wrapped_failed`, `wrapped_card_viewed`, `wrapped_completed`, `hopscotch_hop`, `wrapped_shared`, `caption_copied` and `wearer_switched`. The product page poll sends `device_preference_answered` (`choice`: `bracelet`, `phone_app` or `apple_watch`).
+- Named events: the prototype sends `mood_changed`, `bracelets_paired`, `bracelets_tapped`, `next_day`, `scenario_switched` and `prototype_reset`. Wrapped sends `wrapped_requested`, `wrapped_generated` (with cost), `wrapped_failed`, `wrapped_card_viewed`, `wrapped_completed`, `hopscotch_hop`, `wrapped_shared`, `caption_copied` and `wearer_switched`. The product page poll sends `device_preference_answered` (`choice`: `bracelet`, `phone_app` or `apple_watch`). The product page's mood pad (Hang, Quiet, Wave, Off under the ring) sends `hero_mood_tried` (`mood`).
 
 ## Working rules
 
-- Read `README.md`, `PRODUCT.md` and this file before making changes; read `DESIGN.md` before touching `app/index.html`.
+- Read `README.md`, `PRODUCT.md` and this file before making changes; read `DESIGN.md` before touching `docs/index.html` or `app/index.html`.
 - Keep changes small and focused; explain what you changed and why.
 - Ask before deleting or overwriting existing files.
 - Don't commit or push unless explicitly asked.

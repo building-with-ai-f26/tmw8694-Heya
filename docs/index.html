@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Heya: PRD v2</title>
+  <meta name="description" content="Heya: a light-up friendship bracelet and app. Product page, PRD and build logs.">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
   <!-- PostHog analytics. The project key is public by design (it only allows sending events). -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -15,152 +18,366 @@
     posthog.register({ heya_page: document.title, heya_local: location.protocol === 'file:' });
   </script>
   <style>
-    :root {
-      color-scheme: light dark;
-      --text: #1f2328;
-      --muted: #59636e;
-      --bg: #ffffff;
-      --surface: #f6f8fa;
-      --border: #d1d9e0;
-      --accent: #0969da;
-      --green: #1a7f37;
-      --purple: #8250df;
-      --yellow: #bf8700;
+    /* Inter (SIL OFL, docs/fonts/OFL.txt): stands in for SF Pro on Windows and Android. Apple devices use SF Pro and never download it. */
+    @font-face {
+      font-family: "Heya Inter";
+      src: url("fonts/inter-latin-wght-normal.woff2") format("woff2");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
     }
-    @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark light;
+      --ground: #000000;
+      --card: #171717;
+      --card-raised: #222222;
+      --line: #2b2b2b;
+      --text: #ffffff;
+      --quiet: #a3a3a3;
+      --hang: #33d499;
+      --quiet-mood: #a68cfa;
+      --wave: #fabf24;
+      --off: #383838;
+      --on-mood: #000000;
+      --on-off: #ffffff;
+      --action: #ffffff;
+      --on-action: #000000;
+      --select: rgba(255, 255, 255, 0.24);
+      --ring-shadow: rgba(0, 0, 0, 0);
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Heya Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Heya Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+    @media (prefers-color-scheme: light) {
       :root {
-        --text: #e6edf3;
-        --muted: #9198a1;
-        --bg: #0d1117;
-        --surface: #151b23;
-        --border: #3d444d;
-        --accent: #4493f8;
-        --green: #3fb950;
-        --purple: #ab7df8;
-        --yellow: #d29922;
+        --ground: #f2f2f7;
+        --card: #ffffff;
+        --card-raised: #ebebf0;
+        --line: #d8d8de;
+        --text: #000000;
+        --quiet: #5c5c61;
+        --off: #c7c7cc;
+        --on-off: #000000;
+        --action: #000000;
+        --on-action: #ffffff;
+        --select: rgba(0, 0, 0, 0.14);
+        --ring-shadow: rgba(0, 0, 0, 0.18);
+        --glow: 0.75;
       }
     }
+    * { box-sizing: border-box; }
+    html { scrollbar-color: var(--off) var(--ground); }
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.55;
       color: var(--text);
-      background: var(--bg);
+      background: var(--ground);
+      -webkit-font-smoothing: antialiased;
     }
-    main {
-      max-width: 42rem;
+    ::selection { background: var(--select); }
+    main { padding: 0 20px 5rem; }
+    .column { max-width: 62rem; margin: 0 auto; }
+    .column > * { max-width: 42rem; }
+
+    /* Masthead: the band, lit */
+    .masthead {
+      max-width: 62rem;
       margin: 0 auto;
-      padding: 4rem 1.25rem;
+      padding: 4.5rem 0 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
     }
-    h1 { margin: 0 0 0.25rem; font-size: 2.5rem; }
-    h2 { margin-top: 2.75rem; border-bottom: 1px solid var(--border); padding-bottom: 0.25rem; }
-    h3 { margin-bottom: 0.25rem; }
-    .tagline { margin: 0 0 0.5rem; color: var(--muted); font-size: 1.125rem; }
-    .meta { margin: 0 0 1.25rem; color: var(--muted); font-size: 0.875rem; }
+    h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 9vw, 5.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+    }
+    .tagline {
+      margin: 1rem 0 0.75rem;
+      font-size: 1.3rem;
+      line-height: 1.4;
+      font-weight: 500;
+      max-width: 26ch;
+      text-wrap: balance;
+    }
+    .meta { margin: 0 0 1.75rem; color: var(--quiet); font-size: 0.9rem; }
+    .meta a { color: var(--quiet); }
     .button {
-      display: inline-block;
-      padding: 0.7rem 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      min-height: 50px;
+      padding: 0 1.6rem;
       border-radius: 999px;
-      background: var(--accent);
-      color: var(--bg);
-      font-weight: 600;
+      background: var(--action);
+      color: var(--on-action);
+      font-weight: 700;
+      font-size: 1.05rem;
       text-decoration: none;
+      transition: transform 0.2s var(--ease), opacity 0.2s;
     }
-    .button:hover { filter: brightness(1.1); }
-    .button:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+    .button:hover { transform: translateY(-1px); opacity: 0.88; }
+    .button:active { transform: scale(0.98); }
+
+    .band {
+      margin: 0;
+      display: grid;
+      justify-items: center;
+      gap: 1rem;
+    }
+    .ring { width: min(260px, 70vw); }
+    .ring-svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 14px 22px var(--ring-shadow)); }
+    .led { fill: var(--led, var(--hang)); transition: fill 0.35s var(--ease), opacity 0.35s var(--ease); }
+    .led-glow { filter: url(#led-blur); opacity: var(--glow, 1); }
+    .ring[data-mood="hang"] { --led: var(--hang); }
+    .ring[data-mood="quiet"] { --led: var(--quiet-mood); }
+    .ring[data-mood="wave"] { --led: var(--wave); }
+    .ring[data-mood="off"] .led { opacity: 0; }
+    .ring[data-mood="quiet"] .leds { animation: breathe 1.85s ease-in-out infinite; }
+    .ring.chase .led { animation: led-on 0.55s var(--ease) both; animation-delay: calc(var(--i) * 45ms); }
+    @keyframes led-on { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.28; } }
+
+    .readout { margin: 0; text-align: center; }
+    .readout strong { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.25rem; }
+    #mood-line { display: block; color: var(--quiet); font-size: 0.95rem; min-height: 1.5em; }
+    .readout b { font-weight: 700; }
+    .mood-pad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; width: min(100%, 22rem); }
+
+    .pill {
+      font: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      min-height: 46px;
+      padding: 0 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.15s var(--ease);
+    }
+    .pill:hover { border-color: var(--quiet); }
+    .pill:active { transform: scale(0.97); }
+    .pill[aria-pressed="true"] { background: var(--action); color: var(--on-action); border-color: transparent; }
+    .mood-pad .pill[data-mood="hang"][aria-pressed="true"] { background: var(--hang); color: var(--on-mood); }
+    .mood-pad .pill[data-mood="quiet"][aria-pressed="true"] { background: var(--quiet-mood); color: var(--on-mood); }
+    .mood-pad .pill[data-mood="wave"][aria-pressed="true"] { background: var(--wave); color: var(--on-mood); }
+    .mood-pad .pill[data-mood="off"][aria-pressed="true"] { background: var(--off); color: var(--on-off); }
+
+    a { color: var(--text); text-decoration-color: var(--quiet); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    a:hover { text-decoration-color: var(--text); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; border-radius: 14px; }
+    .button:focus-visible { border-radius: 999px; }
+
     .notice {
-      margin: 1.25rem 0 2rem;
-      padding: 0.75rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface);
+      margin: 0 0 1rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 16px;
+      background: var(--card);
       font-size: 0.875rem;
-      color: var(--muted);
+      color: var(--quiet);
     }
     .notice strong { color: var(--text); }
-    a { color: var(--accent); }
+
+    /* Reading column */
+    h2 {
+      margin: 4.5rem 0 0.75rem;
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.1rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      scroll-margin-top: 1.5rem;
+    }
+    h3 { margin: 2.25rem 0 0.4rem; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; }
+    p, li { text-wrap: pretty; }
+    ul, ol { padding-left: 1.3rem; }
+    li { margin: 0.35rem 0; }
+    li::marker { color: var(--quiet); }
+    code {
+      font-family: var(--mono);
+      font-size: 0.85em;
+      padding: 0.1em 0.4em;
+      border-radius: 6px;
+      background: var(--card-raised);
+    }
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem 1.25rem;
+      background: var(--card);
+      border-radius: 22px;
+      padding: 1.25rem 1.4rem;
       margin: 1rem 0;
     }
     .card > :first-child { margin-top: 0; }
     .card > :last-child { margin-bottom: 0; }
+
+    .poll { margin: 1rem 0 0; padding: 1.4rem 1.5rem; }
+    .poll h2 { margin: 0 0 0.4rem; font-size: 1.45rem; letter-spacing: -0.01em; }
+    .poll p { color: var(--quiet); margin: 0; }
+    .poll-options { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+    .poll-options .pill { background: var(--card-raised); border-color: transparent; }
+    .poll-options .pill:hover { border-color: var(--quiet); }
+    .poll-options .pill[aria-pressed="true"] { background: var(--action); color: var(--on-action); }
+    .poll .poll-thanks { margin: 0.75rem 0 0; font-size: 0.9rem; }
+    .poll .poll-thanks:empty { margin: 0; }
+
     .moods { list-style: none; padding: 0; }
-    .moods li { display: flex; align-items: baseline; gap: 0.6rem; margin: 0.35rem 0; }
+    .moods li { display: flex; align-items: baseline; gap: 0.7rem; margin: 0.45rem 0; }
     .dot {
       flex: none;
-      width: 0.8rem; height: 0.8rem;
+      width: 0.7rem; height: 0.7rem;
       border-radius: 50%;
-      border: 1px solid var(--border);
-      transform: translateY(0.1rem);
+      background: var(--dot, var(--off));
     }
-    .dot.green { background: var(--green); }
-    .dot.purple { background: var(--purple); }
-    .dot.yellow { background: var(--yellow); }
-    .dot.off { background: transparent; }
+    .moods .dot { transform: translateY(0.05rem); }
+    .dot.green { --dot: var(--hang); }
+    .dot.purple { --dot: var(--quiet-mood); }
+    .dot.yellow { --dot: var(--wave); }
+    .dot.off { background: var(--off); }
+
     ol.steps { padding-left: 1.4rem; }
     ol.steps li { margin: 0.6rem 0; }
+    h4.label { display: block; margin: 1.5rem 0 0.25rem; }
+    .card h4.label { margin-top: 1.1rem; }
     .label {
       display: inline-block;
       font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--quiet);
     }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
-    th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--border); }
-    th { color: var(--muted); font-weight: 600; }
-    .table-wrap { overflow-x: auto; }
-    figure { margin: 1.25rem 0; }
+
+    .person { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 1rem; align-items: center; margin-bottom: 0.75rem; }
+    .person h3 { margin: 0; font-size: 1.3rem; }
+    .person .label { display: block; margin-top: 0.15rem; }
+    .avatar { width: 56px; height: 56px; display: block; shape-rendering: crispEdges; }
+    .avatar-tile { fill: #000; }
+    .avatar-px { fill: #fff; }
+    @media (prefers-color-scheme: dark) { .avatar-tile { stroke: var(--line); stroke-width: 0.12; } }
+
+    .table-wrap { overflow-x: auto; margin: 1.25rem 0; background: var(--card); border-radius: 22px; padding: 0.4rem 1.1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+    th, td { text-align: left; vertical-align: top; padding: 0.7rem 0.6rem; border-bottom: 1px solid var(--line); }
+    tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+    thead th { color: var(--quiet); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
+    tbody th { font-weight: 700; }
+    figure { margin: 1.75rem 0; }
     figure img {
       display: block;
       width: 100%;
       height: auto;
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 22px;
+      background: var(--card);
     }
-    h3 { margin-top: 1.75rem; }
-    figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted); }
-    footer { margin-top: 3rem; font-size: 0.875rem; color: var(--muted); }
-    .poll h2 { margin-top: 0; border: 0; padding: 0; font-size: 1.25rem; }
-    .poll-options { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.75rem 0 0.25rem; }
-    .poll-options button {
-      font: inherit;
-      font-weight: 600;
-      padding: 0.6rem 1.1rem;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      cursor: pointer;
+    figcaption { margin-top: 0.6rem; font-size: 0.9rem; color: var(--quiet); }
+    figcaption strong { color: var(--text); }
+    section > .meta { margin: -0.25rem 0 1.25rem; }
+    footer { margin: 5rem 0 0; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--quiet); }
+    footer a { color: var(--quiet); }
+
+    @media (max-width: 560px) {
+      .table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap th, .table-wrap td { display: block; }
+      .table-wrap thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      .table-wrap tbody tr { padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+      .table-wrap tbody tr:last-child { border-bottom: 0; }
+      .table-wrap tbody th, .table-wrap td { border: 0; padding: 0; }
+      .table-wrap td::before { content: attr(data-label); display: block; margin-top: 0.5rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--quiet); }
     }
-    .poll-options button:hover { border-color: var(--accent); }
-    .poll-options button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-    .poll-options button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--bg); }
-    .poll-thanks { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--muted); min-height: 1.5em; }
+    @media (max-width: 760px) {
+      .masthead { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 3rem; }
+      .ring { width: min(210px, 62vw); }
+      .mood-pad { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ring.chase .led, .ring[data-mood="quiet"] .leds { animation: none; }
+      .led, .pill, .button { transition: none; }
+    }
   </style>
 </head>
 <body>
   <main>
-    <header>
-      <h1>Heya</h1>
-      <p class="tagline">A light-up bracelet that gets people off their screens and into real time with friends.</p>
-      <p class="meta">PRD v2 · Building with AI, Fall 2026 · <a href="#prd2">PRD v2</a> · <a href="#summary">PRD v1</a></p>
-      <a class="button" id="demo-button" href="prototype.html">Try the prototype</a>
-      <p class="notice" role="note"><strong>Heads up, testers:</strong> this page uses PostHog to record your visit, what you click, and a session replay (a playback of your mouse movements and clicks) so I can see how people use Heya. Anything typed into form fields is hidden, and no names or emails are collected.</p>
+    <header class="masthead">
+      <div>
+        <h1>Heya</h1>
+        <p class="tagline">A light-up bracelet that gets people off their screens and into real time with friends.</p>
+        <p class="meta">PRD v2 · Building with AI, Fall 2026 · <a href="#prd2">PRD v2</a> · <a href="#summary">PRD v1</a></p>
+        <a class="button" id="demo-button" href="prototype.html">Try the prototype</a>
+      </div>
+      <figure class="band" aria-label="The Heya band. Pick a mood to light it.">
+        <div class="ring" id="ring" data-mood="hang">
+          <svg class="ring-svg" viewBox="0 0 240 240" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#ededed"/><stop offset=".38" stop-color="#8f8f8f"/><stop offset=".68" stop-color="#cccccc"/><stop offset="1" stop-color="#707070"/>
+              </linearGradient>
+              <filter id="led-blur" x="-1" y="-1" width="3" height="3"><feGaussianBlur stdDeviation="10"/></filter>
+            </defs>
+            <circle cx="120" cy="120" r="90" fill="none" stroke="url(#metal)" stroke-width="30.6"/>
+            <circle cx="120" cy="120" r="90" fill="none" stroke="#1c1c1c" stroke-width="9"/>
+            <g class="leds"><g class="led" style="--i:0"><circle class="led-glow" cx="120.0" cy="30.0" r="13"/><circle class="led-core" cx="120.0" cy="30.0" r="4.1"/></g><g class="led" style="--i:1"><circle class="led-glow" cx="165.0" cy="42.1" r="13"/><circle class="led-core" cx="165.0" cy="42.1" r="4.1"/></g><g class="led" style="--i:2"><circle class="led-glow" cx="197.9" cy="75.0" r="13"/><circle class="led-core" cx="197.9" cy="75.0" r="4.1"/></g><g class="led" style="--i:3"><circle class="led-glow" cx="210.0" cy="120.0" r="13"/><circle class="led-core" cx="210.0" cy="120.0" r="4.1"/></g><g class="led" style="--i:4"><circle class="led-glow" cx="197.9" cy="165.0" r="13"/><circle class="led-core" cx="197.9" cy="165.0" r="4.1"/></g><g class="led" style="--i:5"><circle class="led-glow" cx="165.0" cy="197.9" r="13"/><circle class="led-core" cx="165.0" cy="197.9" r="4.1"/></g><g class="led" style="--i:6"><circle class="led-glow" cx="120.0" cy="210.0" r="13"/><circle class="led-core" cx="120.0" cy="210.0" r="4.1"/></g><g class="led" style="--i:7"><circle class="led-glow" cx="75.0" cy="197.9" r="13"/><circle class="led-core" cx="75.0" cy="197.9" r="4.1"/></g><g class="led" style="--i:8"><circle class="led-glow" cx="42.1" cy="165.0" r="13"/><circle class="led-core" cx="42.1" cy="165.0" r="4.1"/></g><g class="led" style="--i:9"><circle class="led-glow" cx="30.0" cy="120.0" r="13"/><circle class="led-core" cx="30.0" cy="120.0" r="4.1"/></g><g class="led" style="--i:10"><circle class="led-glow" cx="42.1" cy="75.0" r="13"/><circle class="led-core" cx="42.1" cy="75.0" r="4.1"/></g><g class="led" style="--i:11"><circle class="led-glow" cx="75.0" cy="42.1" r="13"/><circle class="led-core" cx="75.0" cy="42.1" r="4.1"/></g></g>
+          </svg>
+        </div>
+        <p class="readout" id="readout" data-mood="hang" aria-live="polite"><strong><span class="dot green" aria-hidden="true"></span><b id="mood-name">Let's hang</b></strong><span id="mood-line">Friends nearby see you're up for hanging out.</span></p>
+        <div class="mood-pad" role="group" aria-label="Try a mood">
+          <button type="button" class="pill" data-mood="hang" aria-pressed="true">Hang</button>
+          <button type="button" class="pill" data-mood="quiet" aria-pressed="false">Quiet</button>
+          <button type="button" class="pill" data-mood="wave" aria-pressed="false">Wave</button>
+          <button type="button" class="pill" data-mood="off" aria-pressed="false">Off</button>
+        </div>
+      </figure>
     </header>
+    <script>
+      (function () {
+        var MOODS = {
+          hang: ['Let\'s hang', 'Friends nearby see you\'re up for hanging out.', 'green'],
+          quiet: ['Quiet company', 'Low-key. Only your inner circle sees this one.', 'purple'],
+          wave: ['Busy, but wave', 'Busy, but say hi if you pass each other.', 'yellow'],
+          off: ['Off', 'While you\'re Off, nobody can see you.', 'off']
+        };
+        var ring = document.getElementById('ring');
+        var readout = document.getElementById('readout');
+        var dot = readout.querySelector('.dot');
+        var pills = document.querySelectorAll('.mood-pad .pill');
+        function chase() {
+          ring.classList.remove('chase');
+          void ring.offsetWidth;
+          ring.classList.add('chase');
+        }
+        function setMood(mood, fromClick) {
+          var m = MOODS[mood];
+          ring.dataset.mood = mood;
+          readout.dataset.mood = mood;
+          document.getElementById('mood-name').textContent = m[0];
+          document.getElementById('mood-line').textContent = m[1];
+          dot.className = 'dot ' + m[2];
+          pills.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mood === mood)); });
+          if (mood !== 'off') chase();
+          if (fromClick && window.posthog) posthog.capture('hero_mood_tried', { mood: mood });
+        }
+        pills.forEach(function (b) { b.addEventListener('click', function () { setMood(b.dataset.mood, true); }); });
+        chase();
+      })();
+    </script>
+
+    <div class="column">
+      <p class="notice" role="note"><strong>Heads up, testers:</strong> this page uses PostHog to record your visit, what you click, and a session replay (a playback of your mouse movements and clicks) so I can see how people use Heya. Anything typed into form fields is hidden, and no names or emails are collected.</p>
 
     <section class="card poll" aria-labelledby="poll-title">
       <h2 id="poll-title">Quick question: how would you use Heya?</h2>
       <p>If you already have a phone, would you wear a separate Heya bracelet, or would you rather get Heya as an app? Pick one; it helps decide what to build next.</p>
       <div class="poll-options" role="group" aria-labelledby="poll-title">
-        <button type="button" data-choice="bracelet" aria-pressed="false">I'd wear the bracelet</button>
-        <button type="button" data-choice="phone_app" aria-pressed="false">Just the app on my phone</button>
-        <button type="button" data-choice="apple_watch" aria-pressed="false">An Apple Watch app</button>
+        <button type="button" class="pill" data-choice="bracelet" aria-pressed="false">I'd wear the bracelet</button>
+        <button type="button" class="pill" data-choice="phone_app" aria-pressed="false">Just the app on my phone</button>
+        <button type="button" class="pill" data-choice="apple_watch" aria-pressed="false">An Apple Watch app</button>
       </div>
       <p class="poll-thanks" id="poll-thanks" aria-live="polite"></p>
     </section>
@@ -236,12 +453,12 @@
       <h3>Cost per run</h3>
       <p>Each Wrapped makes <strong>one</strong> AI call. Measured over about 30 real runs on November 16:</p>
       <div class="table-wrap">
-        <table>
-          <thead><tr><th scope="col"></th><th scope="col">Grant (kid)</th><th scope="col">Faith (adult)</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">Tokens in / out</th><td>about 1,100 / 380</td><td>about 1,500 / 480</td></tr>
-            <tr><th scope="row">Cost per run</th><td>about $0.0003</td><td>about $0.0004</td></tr>
-            <tr><th scope="row">Time</th><td>2.0–2.7 s</td><td>2.4–3.0 s</td></tr>
+        <table role="table">
+          <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader"></th><th scope="col" role="columnheader">Grant (kid)</th><th scope="col" role="columnheader">Faith (adult)</th></tr></thead>
+          <tbody role="rowgroup">
+            <tr role="row"><th scope="row" role="rowheader">Tokens in / out</th><td role="cell" data-label="Grant (kid)">about 1,100 / 380</td><td role="cell" data-label="Faith (adult)">about 1,500 / 480</td></tr>
+            <tr role="row"><th scope="row" role="rowheader">Cost per run</th><td role="cell" data-label="Grant (kid)">about $0.0003</td><td role="cell" data-label="Faith (adult)">about $0.0004</td></tr>
+            <tr role="row"><th scope="row" role="rowheader">Time</th><td role="cell" data-label="Grant (kid)">2.0–2.7 s</td><td role="cell" data-label="Faith (adult)">2.4–3.0 s</td></tr>
           </tbody>
         </table>
       </div>
@@ -259,14 +476,14 @@
       </ul>
       <p>As two friends walk toward each other, their bracelets glow warmer and then pulse together. When they meet, they tap bracelets to save the moment and build a streak. What the app does with that tap depends on who's wearing the bracelet:</p>
       <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th scope="col"></th><th scope="col">Kids without phones</th><th scope="col">Gen Z and young adults with phones</th></tr>
+        <table role="table">
+          <thead role="rowgroup">
+            <tr role="row"><th scope="col" role="columnheader"></th><th scope="col" role="columnheader">Kids without phones</th><th scope="col" role="columnheader">Gen Z and young adults with phones</th></tr>
           </thead>
-          <tbody>
-            <tr><th scope="row">Who runs the app</th><td>A parent</td><td>The wearer</td></tr>
-            <tr><th scope="row">What a tap builds</th><td>A <strong>stats page</strong>: which friends you've tapped with, how often, and your streaks</td><td>A private <strong>map</strong> of the places you've hung out</td></tr>
-            <tr><th scope="row">Location</th><td>Parents can see where their kid is</td><td>Saved only at the moment of a tap and never shared</td></tr>
+          <tbody role="rowgroup">
+            <tr role="row"><th scope="row" role="rowheader">Who runs the app</th><td role="cell" data-label="Kids without phones">A parent</td><td role="cell" data-label="Gen Z and young adults with phones">The wearer</td></tr>
+            <tr role="row"><th scope="row" role="rowheader">What a tap builds</th><td role="cell" data-label="Kids without phones">A <strong>stats page</strong>: which friends you've tapped with, how often, and your streaks</td><td role="cell" data-label="Gen Z and young adults with phones">A private <strong>map</strong> of the places you've hung out</td></tr>
+            <tr role="row"><th scope="row" role="rowheader">Location</th><td role="cell" data-label="Kids without phones">Parents can see where their kid is</td><td role="cell" data-label="Gen Z and young adults with phones">Saved only at the moment of a tap and never shared</td></tr>
           </tbody>
         </table>
       </div>
@@ -276,16 +493,22 @@
       <h2 id="users">Target users</h2>
 
       <div class="card">
-        <p><span class="label">User 1: Kids without phones</span></p>
-        <p><strong>Grant, 7.</strong> Very social and always wants to be with his friends. He's too young for a phone, so every meetup has to go through a parent.</p>
-        <p><span class="label">Why him</span></p>
+        <div class="person">
+          <svg class="avatar" viewBox="-1.5 -1.5 15 15" role="img" aria-label="Grant's pixel avatar"><rect class="avatar-tile" x="-1.5" y="-1.5" width="15" height="15" rx="2.5"/><g class="avatar-px"><rect x="2" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="9" y="0" width="1" height="1"/><rect x="3" y="1" width="6" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="9" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="10" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="2" height="1"/><rect x="7" y="4" width="2" height="1"/><rect x="10" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="3" y="5" width="2" height="1"/><rect x="7" y="5" width="2" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="8" y="7" width="1" height="1"/><rect x="10" y="7" width="1" height="1"/><rect x="1" y="8" width="1" height="1"/><rect x="4" y="8" width="4" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="2" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="3" y="10" width="6" height="1"/></g></svg>
+          <div><h3>Grant, 7</h3><span class="label">User 1: Kids without phones</span></div>
+        </div>
+        <p>Very social and always wants to be with his friends. He's too young for a phone, so every meetup has to go through a parent.</p>
+        <h4 class="label">Why him</h4>
         <p>His parents are the buyers, and they have two problems: they need to know where he is before they'll say yes to going out, and they want him off screens. The bracelet answers both, and tapping with friends turns his social energy into a game he actually wants to play.</p>
       </div>
 
       <div class="card">
-        <p><span class="label">User 2: Gen Z and young adults</span></p>
-        <p><strong>Faith, 30.</strong> Very social, always out and about in the city, and always happy to stop and say hi. Her friends live and work all over town, so they're often a few blocks apart without knowing it.</p>
-        <p><span class="label">Why her</span></p>
+        <div class="person">
+          <svg class="avatar" viewBox="-1.5 -1.5 15 15" role="img" aria-label="Faith's pixel avatar"><rect class="avatar-tile" x="-1.5" y="-1.5" width="15" height="15" rx="2.5"/><g class="avatar-px"><rect x="3" y="0" width="6" height="1"/><rect x="2" y="1" width="8" height="1"/><rect x="1" y="2" width="3" height="1"/><rect x="8" y="2" width="3" height="1"/><rect x="1" y="3" width="2" height="1"/><rect x="9" y="3" width="2" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="7" y="4" width="1" height="1"/><rect x="10" y="4" width="1" height="1"/><rect x="1" y="5" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="4" y="7" width="4" height="1"/><rect x="10" y="7" width="1" height="1"/><rect x="1" y="8" width="2" height="1"/><rect x="9" y="8" width="2" height="1"/><rect x="1" y="9" width="3" height="1"/><rect x="8" y="9" width="3" height="1"/><rect x="1" y="10" width="2" height="1"/><rect x="9" y="10" width="2" height="1"/></g></svg>
+          <div><h3>Faith, 30</h3><span class="label">User 2: Gen Z and young adults</span></div>
+        </div>
+        <p>Very social, always out and about in the city, and always happy to stop and say hi. Her friends live and work all over town, so they're often a few blocks apart without knowing it.</p>
+        <h4 class="label">Why her</h4>
         <p>She already wants to see people in person. What's missing is knowing when a friend is close by. She buys the bracelet for the fun of running into people, without sharing her location all day.</p>
       </div>
     </section>
@@ -294,7 +517,7 @@
       <h2 id="workflow-change">Before and after</h2>
 
       <h3>Grant: Saturday morning</h3>
-      <p><span class="label">Before</span></p>
+      <h4 class="label">Before</h4>
       <ol class="steps">
         <li>Grant wakes up wanting to play with friends and asks his mom, "Can I see Ava? Is Theo outside?"</li>
         <li>She texts the other parents to set up a playdate. Replies take an hour, or never come.</li>
@@ -303,7 +526,7 @@
       </ol>
       <p><strong>The pain:</strong> Grant is a very social kid with no way to find his friends without an adult in the middle. His parents can choose freedom and worry, or safety and screens.</p>
 
-      <p><span class="label">After</span></p>
+      <h4 class="label">After</h4>
       <ol class="steps">
         <li>Grant presses his bracelet, and it glows <strong>green</strong>. His mom can see in her app that he's at the neighborhood playground.</li>
         <li>Ava's bracelet is green too. As they get closer, both glow warmer, then pulse.</li>
@@ -313,7 +536,7 @@
       <p><strong>The change:</strong> his parents get peace of mind without handing him a phone, and Grant gets a game he wins by going outside and finding his friends.</p>
 
       <h3>Faith: a Saturday in the city</h3>
-      <p><span class="label">Before</span></p>
+      <h4 class="label">Before</h4>
       <ol class="steps">
         <li>Faith is out running errands and grabbing coffee, and would love some company.</li>
         <li>She texts a few friends: "anyone around?" Replies come in an hour later, after she's gone home.</li>
@@ -322,7 +545,7 @@
       </ol>
       <p><strong>The pain:</strong> Faith is always down to say hi, but she only finds out about near misses afterward. The only fix today is sharing her location all the time.</p>
 
-      <p><span class="label">After</span></p>
+      <h4 class="label">After</h4>
       <ol class="steps">
         <li>Faith sets her bracelet to <strong>green</strong> and heads out without checking her phone.</li>
         <li>As she walks past the farmers market, her bracelet starts glowing warmer. A friend is close by.</li>
@@ -459,9 +682,10 @@
       </ul>
     </section>
 
-    <footer>
+      <footer>
       <a href="prototype.html">Try the prototype</a> · <a href="https://github.com/building-with-ai-f26/tmw8694-Heya">View on GitHub</a>
-    </footer>
+      </footer>
+    </div>
   </main>
 </body>
 </html>

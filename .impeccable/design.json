@@ -1,10 +1,479 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-16T00:00:00Z",
-  "title": "Design System: Heya Wrapped",
+  "generatedAt": "2026-11-17T00:00:00Z",
+  "title": "Design System: Heya",
   "extensions": {
     "colorMeta": {
-      "chalk-green": {
+      "hang": {
+        "role": "primary",
+        "displayName": "Let's Hang Green",
+        "canonical": "#33d499",
+        "tonalRamp": [
+          "#000f07",
+          "#002d1d",
+          "#084f36",
+          "#0d7350",
+          "#16996c",
+          "#07c289",
+          "#6de4b0",
+          "#c2ffe0"
+        ],
+        "scope": "system",
+        "usage": "Means a mood. Fills only the selected mood pill, mood dots and ring LEDs; always with the mood's name."
+      },
+      "quiet-mood": {
+        "role": "primary",
+        "displayName": "Quiet Company Lilac",
+        "canonical": "#a68cfa",
+        "tonalRamp": [
+          "#0d0520",
+          "#28174f",
+          "#472c84",
+          "#6749b1",
+          "#876cd7",
+          "#aa90fe",
+          "#cbbfff",
+          "#efecff"
+        ],
+        "scope": "system",
+        "usage": "Means a mood. Fills only the selected mood pill, mood dots and ring LEDs; always with the mood's name."
+      },
+      "wave": {
+        "role": "primary",
+        "displayName": "Busy-But-Wave Marigold",
+        "canonical": "#fabf24",
+        "tonalRamp": [
+          "#110a00",
+          "#312302",
+          "#543e05",
+          "#7b5c08",
+          "#a37b0f",
+          "#cd9d1e",
+          "#f3c151",
+          "#ffedc8"
+        ],
+        "scope": "system",
+        "usage": "Means a mood. Fills only the selected mood pill, mood dots and ring LEDs; always with the mood's name."
+      },
+      "off": {
+        "role": "primary",
+        "displayName": "Off Gray",
+        "canonical": "#383838",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system",
+        "usage": "Means a mood. Fills only the selected mood pill, mood dots and ring LEDs; always with the mood's name."
+      },
+      "off-light": {
+        "role": "primary",
+        "displayName": "Off Gray (light)",
+        "canonical": "#c7c7cc",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#252527",
+          "#424245",
+          "#616165",
+          "#828286",
+          "#a4a4a9",
+          "#c9c9cd",
+          "#eeeef1"
+        ],
+        "scope": "system",
+        "usage": "Means a mood. Fills only the selected mood pill, mood dots and ring LEDs; always with the mood's name."
+      },
+      "on-mood": {
+        "role": "primary",
+        "displayName": "Mood Ink",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "action": {
+        "role": "secondary",
+        "displayName": "Neutral Action",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "on-action": {
+        "role": "secondary",
+        "displayName": "On Action",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "action-light": {
+        "role": "secondary",
+        "displayName": "Neutral Action (light)",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "on-action-light": {
+        "role": "secondary",
+        "displayName": "On Action (light)",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Black Ground",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Card",
+        "canonical": "#171717",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "card-raised": {
+        "role": "neutral",
+        "displayName": "Raised Card",
+        "canonical": "#222222",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#2b2b2b",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Text",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "quiet": {
+        "role": "neutral",
+        "displayName": "Quiet",
+        "canonical": "#a3a3a3",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "ground-light": {
+        "role": "neutral",
+        "displayName": "Grouped Gray Ground",
+        "canonical": "#f2f2f7",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#252527",
+          "#424245",
+          "#616165",
+          "#828286",
+          "#a4a4a9",
+          "#c9c9cd",
+          "#eeeef1"
+        ],
+        "scope": "system"
+      },
+      "card-light": {
+        "role": "neutral",
+        "displayName": "White Card",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "card-raised-light": {
+        "role": "neutral",
+        "displayName": "Raised Card (light)",
+        "canonical": "#ebebf0",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#252527",
+          "#424245",
+          "#616165",
+          "#828286",
+          "#a4a4a9",
+          "#c9c9cd",
+          "#eeeef1"
+        ],
+        "scope": "system"
+      },
+      "line-light": {
+        "role": "neutral",
+        "displayName": "Hairline (light)",
+        "canonical": "#d8d8de",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#252527",
+          "#414146",
+          "#616166",
+          "#828287",
+          "#a4a4aa",
+          "#c8c8cd",
+          "#eeeef2"
+        ],
+        "scope": "system"
+      },
+      "text-light": {
+        "role": "neutral",
+        "displayName": "Text (light)",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "quiet-light": {
+        "role": "neutral",
+        "displayName": "Quiet (light)",
+        "canonical": "#5c5c61",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#252527",
+          "#414146",
+          "#616166",
+          "#828287",
+          "#a4a4aa",
+          "#c8c8cd",
+          "#eeeef1"
+        ],
+        "scope": "system"
+      },
+      "metal-highlight": {
+        "role": "neutral",
+        "displayName": "Metal Highlight",
+        "canonical": "#ededed",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "metal-mid": {
+        "role": "neutral",
+        "displayName": "Metal Mid",
+        "canonical": "#8f8f8f",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "metal-sheen": {
+        "role": "neutral",
+        "displayName": "Metal Sheen",
+        "canonical": "#cccccc",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "metal-shade": {
+        "role": "neutral",
+        "displayName": "Metal Shade",
+        "canonical": "#707070",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "ring-groove": {
+        "role": "neutral",
+        "displayName": "Ring Groove",
+        "canonical": "#1c1c1c",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "avatar-tile": {
+        "role": "neutral",
+        "displayName": "Avatar Tile",
+        "canonical": "#000000",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "avatar-pixel": {
+        "role": "neutral",
+        "displayName": "Avatar Pixel",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "scope": "system"
+      },
+      "wrapped-chalk-green": {
         "role": "primary",
         "displayName": "Let's Hang Green",
         "canonical": "#69d99a",
@@ -19,9 +488,10 @@
           "#5fbb86",
           "#91ddaf",
           "#c2ffd9"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "chalk-purple": {
+      "wrapped-chalk-purple": {
         "role": "primary",
         "displayName": "Quiet Company Lilac",
         "canonical": "#b39bff",
@@ -36,9 +506,10 @@
           "#a995ea",
           "#ccbdff",
           "#f1e4ff"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "chalk-yellow": {
+      "wrapped-chalk-yellow": {
         "role": "primary",
         "displayName": "Busy-But-Wave Marigold",
         "canonical": "#ffd25a",
@@ -53,9 +524,10 @@
           "#c5a03c",
           "#e5c677",
           "#ffecac"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "green-ink": {
+      "wrapped-green-ink": {
         "role": "secondary",
         "displayName": "Leaf Ink",
         "canonical": "#17703f",
@@ -70,9 +542,10 @@
           "#73b789",
           "#a0d9b1",
           "#cdfcda"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "concrete": {
+      "wrapped-concrete": {
         "role": "neutral",
         "displayName": "Sunlit Concrete",
         "canonical": "#d5d2ca",
@@ -87,9 +560,10 @@
           "#a7a59e",
           "#cbc9c3",
           "#f0eee9"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "asphalt": {
+      "wrapped-asphalt": {
         "role": "neutral",
         "displayName": "Night Asphalt",
         "canonical": "#2b2d30",
@@ -104,9 +578,10 @@
           "#a3a5a8",
           "#c7c9cc",
           "#edeef1"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "graphite": {
+      "wrapped-graphite": {
         "role": "neutral",
         "displayName": "Graphite Chalk",
         "canonical": "#1f2124",
@@ -121,9 +596,10 @@
           "#a3a5a8",
           "#c7c9cc",
           "#edeef1"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "graphite-soft": {
+      "wrapped-graphite-soft": {
         "role": "neutral",
         "displayName": "Soft Graphite",
         "canonical": "#3f4247",
@@ -138,9 +614,10 @@
           "#a2a5aa",
           "#c7c9ce",
           "#eceff2"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "line-graphite": {
+      "wrapped-line-graphite": {
         "role": "neutral",
         "displayName": "Line Graphite",
         "canonical": "#2b2d31",
@@ -155,9 +632,10 @@
           "#a3a5a9",
           "#c7c9cd",
           "#edeef2"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "chalk-white": {
+      "wrapped-chalk-white": {
         "role": "neutral",
         "displayName": "White Chalk",
         "canonical": "#f7f5ef",
@@ -172,9 +650,10 @@
           "#a6a5a0",
           "#cac9c5",
           "#efeeeb"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "on-chalk": {
+      "wrapped-on-chalk": {
         "role": "neutral",
         "displayName": "Slab Ink",
         "canonical": "#18191b",
@@ -189,9 +668,10 @@
           "#a4a5a7",
           "#c8c9cb",
           "#edeef0"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "night-chalk": {
+      "wrapped-night-chalk": {
         "role": "neutral",
         "displayName": "Night Chalk",
         "canonical": "#f1eee7",
@@ -206,9 +686,10 @@
           "#a7a59f",
           "#cbc9c4",
           "#f0eeea"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "night-chalk-soft": {
+      "wrapped-night-chalk-soft": {
         "role": "neutral",
         "displayName": "Night Chalk Soft",
         "canonical": "#d3cfc7",
@@ -223,9 +704,10 @@
           "#a8a59e",
           "#ccc9c3",
           "#f1eee9"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       },
-      "line-night": {
+      "wrapped-line-night": {
         "role": "neutral",
         "displayName": "Night Line",
         "canonical": "#ece8df",
@@ -240,237 +722,473 @@
           "#a8a59d",
           "#ccc9c2",
           "#f1eee9"
-        ]
+        ],
+        "scope": "app/index.html (Sidewalk Chalk)"
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Wordmark only; heavy chalk-text filter."
+        "purpose": "The Heya wordmark heading only."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "The big chalked figure on each card (number, name, place)."
+        "purpose": "Section headings; 1.45rem inside a card."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Card headlines under the figure; lite chalk filter."
+        "purpose": "Subsection headings; a person's name at 1.3rem beside an avatar."
       },
-      "title-heavy": {
-        "displayName": "Title Heavy",
-        "purpose": "Cover card heading; side headings use it at 1.35rem."
-      },
-      "statement": {
-        "displayName": "Statement",
-        "purpose": "Cover sentence with true numbers inline at 800 / 1.55em."
+      "tagline": {
+        "displayName": "Tagline",
+        "purpose": "The product statement under the wordmark, max 26ch."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Reading text; card body 1.05rem, max 34ch."
+        "purpose": "Reading text in a 42rem measure."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Quiet meta lines, captions, footer."
       },
       "label": {
-        "displayName": "Label",
-        "purpose": "Card annotations and mood tags."
+        "displayName": "Section Label",
+        "purpose": "Uppercase, quiet; names content (table columns, card subsections, a person's group). Never a kicker above a heading."
       },
       "control": {
         "displayName": "Control",
-        "purpose": "Chalk buttons."
+        "purpose": "Pills."
       },
-      "caption": {
+      "action": {
+        "displayName": "Action",
+        "purpose": "The neutral action capsule."
+      },
+      "mono": {
+        "displayName": "Mono",
+        "purpose": "Inline code on a raised chip."
+      },
+      "wrapped-display": {
+        "displayName": "Display",
+        "purpose": "Wordmark only; heavy chalk-text filter.",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-headline": {
+        "displayName": "Headline",
+        "purpose": "The big chalked figure on each card (number, name, place).",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-title": {
+        "displayName": "Title",
+        "purpose": "Card headlines under the figure; lite chalk filter.",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-title-heavy": {
+        "displayName": "Title Heavy",
+        "purpose": "Cover card heading; side headings use it at 1.35rem.",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-statement": {
+        "displayName": "Statement",
+        "purpose": "Cover sentence with true numbers inline at 800 / 1.55em.",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-body": {
+        "displayName": "Body",
+        "purpose": "Reading text; card body 1.05rem, max 34ch.",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-label": {
+        "displayName": "Label",
+        "purpose": "Card annotations and mood tags.",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-control": {
+        "displayName": "Control",
+        "purpose": "Chalk buttons.",
+        "scope": "app/index.html (Sidewalk Chalk)"
+      },
+      "wrapped-caption": {
         "displayName": "Caption",
-        "purpose": "Card footers, hop caption, run details (tabular numerals)."
+        "purpose": "Card footers, hop caption, run details (tabular numerals).",
+        "scope": "app/index.html (Sidewalk Chalk)"
       }
     },
     "shadows": [
       {
-        "name": "print-on-pavement",
+        "name": "led-glow",
+        "value": "SVG feGaussianBlur stdDeviation=10 on an r=13 circle behind an r=4.1 core (240 viewBox); opacity 1 dark, 0.75 light",
+        "purpose": "The light of each lit ring LED in its mood color. The product's light, not decoration."
+      },
+      {
+        "name": "ring-on-light",
+        "value": "filter: drop-shadow(0 14px 22px rgba(0,0,0,.18))",
+        "purpose": "The ring in light mode only; transparent in dark."
+      },
+      {
+        "name": "wrapped-print-on-pavement",
         "value": "0 10px 24px -8px rgb(0 0 0 / .45)",
         "purpose": "Only under a raster object lying on the ground (share preview, rotated -1.5deg). Never on chalk."
       }
     ],
     "motion": [
       {
-        "name": "ease-chalk",
+        "name": "ease",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "All transitions and the LED chase."
+      },
+      {
+        "name": "led-chase",
+        "value": "each LED opacity 0 -> 1 over 0.55s ease, delay index x 45ms",
+        "purpose": "Relights the ring when the mood changes, as in the app."
+      },
+      {
+        "name": "quiet-breathe",
+        "value": "opacity 1 -> 0.28 -> 1, 1.85s ease-in-out infinite",
+        "purpose": "Quiet company pulse on the ring."
+      },
+      {
+        "name": "action-hover",
+        "value": "translateY(-1px), opacity .88, 0.2s ease; active scale(.98)",
+        "purpose": "Action capsule."
+      },
+      {
+        "name": "pill-press",
+        "value": "colors 0.25s ease; active scale(.97) 0.15s",
+        "purpose": "Pills."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "no chase, no breathe, no transitions",
+        "purpose": "prefers-reduced-motion: reduce."
+      },
+      {
+        "name": "wrapped-ease-chalk",
         "value": "cubic-bezier(.16, 1, .3, 1)",
         "purpose": "All arrivals and hover settles."
       },
       {
-        "name": "draw-in",
+        "name": "wrapped-draw-in",
         "value": "stroke-dashoffset 1 -> 0, 0.8s ease-chalk, staggered 40-90ms",
         "purpose": "Chalk lines draw themselves when a card arrives; pre-drawn under reduced motion."
       },
       {
-        "name": "card-settle",
+        "name": "wrapped-card-settle",
         "value": "from translateY(6px) rotate(.6deg) opacity .4, 0.45s ease-chalk",
         "purpose": "Card arrival; disabled under reduced motion."
       },
       {
-        "name": "chalk-hover",
+        "name": "wrapped-chalk-hover",
         "value": "rotate(-1deg) translateY(-1px), 0.25s ease-chalk",
         "purpose": "Chalk button hover; disabled under reduced motion."
       },
       {
-        "name": "spin",
+        "name": "wrapped-spin",
         "value": "rotate 360deg, 1.1s linear infinite",
         "purpose": "Loading chalk loop in the status line only."
       }
     ],
     "breakpoints": [
       {
-        "name": "stack-side",
+        "name": "stack-masthead",
+        "value": "760px"
+      },
+      {
+        "name": "reflow-tables",
+        "value": "560px"
+      },
+      {
+        "name": "wrapped-stack-side",
         "value": "62rem"
       },
       {
-        "name": "phone",
+        "name": "wrapped-phone",
         "value": "40rem"
       }
     ],
-    "chalkFilters": [
-      {
-        "name": "chalk-line",
-        "purpose": "Drawn lines: displacement scale 3 plus dusty breakup."
-      },
-      {
-        "name": "chalk-scrub",
-        "purpose": "Loose scrub strokes on slabs; heavy knock-out so pavement pits show."
-      },
-      {
-        "name": "chalk-bed",
-        "purpose": "Dense under-layer beneath copy; small pits only."
-      },
-      {
-        "name": "chalk-text",
-        "purpose": "Display and headline lettering."
-      },
-      {
-        "name": "chalk-text-lite",
-        "purpose": "Titles, side headings, captions in the display face."
-      }
-    ],
-    "ground": {
-      "texture": "--aggregate: inline SVG of three fractal-noise layers (mottling, stones, white or dark speckle), 320px tile, per colour scheme",
-      "mapFilter": {
-        "light": "grayscale(1) contrast(.85) brightness(1.08)",
-        "dark": "grayscale(1) invert(1) contrast(.8) brightness(.85)"
-      }
+    "layout": {
+      "column": "62rem",
+      "measure": "42rem",
+      "gutter": "20px",
+      "mastheadColumns": "minmax(0,1.1fr) minmax(0,1fr), gap 3rem",
+      "ringSize": "min(260px, 70vw); min(210px, 62vw) below 760px",
+      "moodPad": "4 equal columns, 0.5rem gap, max 22rem"
     },
-    "outOfScope": "docs/index.html (the product page) is an older, separate surface on its own plain style and is not part of this world."
+    "ring": {
+      "source": "ios-native/Heya.swiftpm/Components.swift RingView",
+      "leds": 12,
+      "metalStops": [
+        "#ededed 0",
+        "#8f8f8f .38",
+        "#cccccc .68",
+        "#707070 1"
+      ],
+      "bandStroke": "17% of diameter",
+      "groove": "#1c1c1c, 5% of diameter",
+      "ledCore": "r 4.1 of 240",
+      "ledGlow": "r 13 blurred 10"
+    },
+    "avatar": {
+      "source": "ios-native/Heya.swiftpm/Components.swift PixelAvatarView/AvatarTile",
+      "grid": "12x12 one-bit",
+      "tileCornerRadius": "2.5 pixel units",
+      "size": "56px",
+      "rendering": "shape-rendering: crispEdges",
+      "darkModeEdge": "stroke var(--line) 0.12 units"
+    },
+    "fonts": {
+      "Heya Inter": "docs/fonts/inter-latin-wght-normal.woff2, weights 100-900, SIL OFL; fallback for SF Pro off Apple devices"
+    },
+    "scopes": {
+      "system": "Unprefixed tokens: Heya's design system (the iPhone app look). Shipped on docs/index.html; applies to every new surface.",
+      "wrapped": "wrapped- tokens and wrapped- prefixed extensions: Sidewalk Chalk, the Wrapped web app app/index.html, until it is restyled to the app look."
+    },
+    "wrapped": {
+      "chalkFilters": [
+        {
+          "name": "chalk-line",
+          "purpose": "Drawn lines: displacement scale 3 plus dusty breakup."
+        },
+        {
+          "name": "chalk-scrub",
+          "purpose": "Loose scrub strokes on slabs; heavy knock-out so pavement pits show."
+        },
+        {
+          "name": "chalk-bed",
+          "purpose": "Dense under-layer beneath copy; small pits only."
+        },
+        {
+          "name": "chalk-text",
+          "purpose": "Display and headline lettering."
+        },
+        {
+          "name": "chalk-text-lite",
+          "purpose": "Titles, side headings, captions in the display face."
+        }
+      ],
+      "ground": {
+        "texture": "--aggregate: inline SVG of three fractal-noise layers (mottling, stones, white or dark speckle), 320px tile, per colour scheme",
+        "mapFilter": {
+          "light": "grayscale(1) contrast(.85) brightness(1.08)",
+          "dark": "grayscale(1) invert(1) contrast(.8) brightness(.85)"
+        }
+      },
+      "narrative": {
+        "scope": "app/index.html until restyled to the app look",
+        "northStar": "Sidewalk Chalk",
+        "rules": [
+          {
+            "name": "The Same-Chalk Swatch Rule",
+            "body": "A mood swatch on a slab of its own mood is scribbled in slab ink so it never disappears.",
+            "section": "wrapped"
+          },
+          {
+            "name": "The Ground Is Pavement Rule",
+            "body": "The Wrapped background is always ground color plus aggregate texture; never a flat fill, a gradient, or a white page.",
+            "section": "wrapped"
+          },
+          {
+            "name": "The Chalk Lettering Rule",
+            "body": "Display and headline type carry the heavier chalk-text filter; titles, side headings and captions in the display face carry the lite filter. System-UI text is never filtered.",
+            "section": "wrapped"
+          }
+        ],
+        "dos": [
+          "**Do** draw every outline and figure as a seeded rough path through the chalk-line filter.",
+          "**Do** commit each card to exactly one chalk: its mood's if it is about a mood, white otherwise.",
+          "**Do** let chalk lines draw in on arrival (0.8s) and render them pre-drawn under prefers-reduced-motion."
+        ],
+        "donts": [
+          "**Don't** use mood chalks decoratively, or anything that reads as Spotify Wrapped.",
+          "**Don't** put CSS borders, radius boxes or drop shadows on chalk elements.",
+          "**Don't** show locations, maps or sharing on a kid's Wrapped."
+        ]
+      }
+    }
   },
   "components": [
     {
-      "name": "Chalk Button",
+      "name": "Action Capsule",
       "kind": "button",
-      "refersTo": "button-chalk",
-      "description": "Default control: a drawn chalk outline, graphite text, tilts on hover.",
+      "refersTo": "button-action",
+      "description": "The neutral primary action: a solid text-colored capsule.",
+      "html": "<a class=\"ds-button\" href=\"#\">Try the prototype</a>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-button{display:inline-flex;align-items:center;min-height:50px;padding:0 1.6rem;border-radius:999px;background:var(--action);color:var(--on-action);font:700 1.05rem var(--font);text-decoration:none;transition:transform .2s var(--ease),opacity .2s}.ds-button:hover{transform:translateY(-1px);opacity:.88}.ds-button:active{transform:scale(.98)}.ds-button:focus-visible{outline:3px solid var(--text);outline-offset:3px;}"
+    },
+    {
+      "name": "Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Rounded-rect toggle on a card fill with a hairline; pressed fills with the text color.",
+      "html": "<div style=\"display:flex;gap:.5rem;padding:1rem;background:var(--ground)\"><button class=\"ds-pill\" aria-pressed=\"true\">Just the app</button><button class=\"ds-pill\" aria-pressed=\"false\">The bracelet</button></div>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-pill{font:700 1rem var(--font);min-height:46px;padding:0 1rem;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .15s var(--ease)}.ds-pill:hover{border-color:var(--quiet)}.ds-pill:active{transform:scale(.97)}.ds-pill[aria-pressed=true]{background:var(--action);color:var(--on-action);border-color:transparent}.ds-pill:focus-visible{outline:3px solid var(--text);outline-offset:3px;border-radius:14px}"
+    },
+    {
+      "name": "Mood Pad",
+      "kind": "chip",
+      "refersTo": "pill-hang-selected",
+      "description": "Four mood pills; only the selected one fills, in its mood color with black text.",
+      "html": "<div class=\"ds-pad\"><button class=\"ds-pill\" data-m=\"hang\" aria-pressed=\"true\">Hang</button><button class=\"ds-pill\" data-m=\"quiet\" aria-pressed=\"false\">Quiet</button><button class=\"ds-pill\" data-m=\"wave\" aria-pressed=\"false\">Wave</button><button class=\"ds-pill\" data-m=\"off\" aria-pressed=\"false\">Off</button></div>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-pad{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;width:22rem;padding:1rem;background:var(--ground)}.ds-pill{font:700 1rem var(--font);min-height:46px;padding:0 1rem;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease)}.ds-pill:hover{border-color:var(--quiet)}.ds-pill:focus-visible{outline:3px solid var(--text);outline-offset:3px;}.ds-pill[aria-pressed=true]{border-color:transparent;color:#000}.ds-pill[data-m=hang][aria-pressed=true]{background:var(--hang)}.ds-pill[data-m=quiet][aria-pressed=true]{background:var(--quiet-mood)}.ds-pill[data-m=wave][aria-pressed=true]{background:var(--wave)}.ds-pill[data-m=off][aria-pressed=true]{background:var(--off);color:var(--text)}"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "A unit of content on a 22px near-black card; no border, no shadow.",
+      "html": "<div style=\"background:var(--ground);padding:1rem\"><section class=\"ds-card\"><h3>Biggest risk</h3><p>The tapping habit fades once the bracelet stops being new.</p></section></div>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-card{background:var(--card);color:var(--text);border-radius:22px;padding:1.25rem 1.4rem;font:400 17px/1.55 var(--font)}.ds-card h3{margin:0 0 .4rem;font-size:1.2rem;font-weight:700;letter-spacing:-.01em}.ds-card p{margin:0}"
+    },
+    {
+      "name": "Section Label",
+      "kind": "custom",
+      "refersTo": "section-label",
+      "description": "Small uppercase tracked quiet label that names content (here, a card subsection). Never a kicker above a heading.",
+      "html": "<div class=\"ds-card\"><h4 class=\"ds-label\">Why him</h4><p>He has no phone, so the band is his only signal.</p></div>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-card{background:var(--card);color:var(--text);border-radius:22px;padding:1.25rem 1.4rem;font:400 17px/1.55 var(--font)}.ds-label{margin:0 0 .25rem;font-size:.75rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--quiet)}.ds-card p{margin:0}"
+    },
+    {
+      "name": "Mood Readout",
+      "kind": "custom",
+      "refersTo": "mood-dot",
+      "description": "A mood dot always followed by the mood's name, with a quiet meaning line.",
+      "html": "<p class=\"ds-readout\"><strong><span class=\"ds-dot\"></span>Let's hang</strong><span>Friends nearby see you're up for hanging out.</span></p>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-readout{margin:0;padding:1rem;background:var(--ground);color:var(--text);text-align:center;font:400 17px/1.55 var(--font)}.ds-readout strong{display:inline-flex;align-items:center;gap:.5rem;font-size:1.25rem;font-weight:700}.ds-readout span:not(.ds-dot){display:block;color:var(--quiet);font-size:.95rem}.ds-dot{width:.7rem;height:.7rem;border-radius:50%;background:var(--hang)}"
+    },
+    {
+      "name": "The Ring",
+      "kind": "custom",
+      "refersTo": "ring",
+      "description": "The 12-LED brushed-metal band lit in a mood color; LEDs chase on, Quiet breathes. Ported from RingView.",
+      "html": "<div class=\"ds-ring\"><svg viewBox=\"0 0 240 240\" aria-hidden=\"true\"><defs><linearGradient id=\"ds-metal\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ededed\"/><stop offset=\".38\" stop-color=\"#8f8f8f\"/><stop offset=\".68\" stop-color=\"#cccccc\"/><stop offset=\"1\" stop-color=\"#707070\"/></linearGradient><filter id=\"ds-led-blur\" x=\"-1\" y=\"-1\" width=\"3\" height=\"3\"><feGaussianBlur stdDeviation=\"10\"/></filter></defs><circle cx=\"120\" cy=\"120\" r=\"90\" fill=\"none\" stroke=\"url(#ds-metal)\" stroke-width=\"30.6\"/><circle cx=\"120\" cy=\"120\" r=\"90\" fill=\"none\" stroke=\"#1c1c1c\" stroke-width=\"9\"/><g><g class=\"ds-led\" style=\"--i:0\"><circle class=\"ds-led-glow\" cx=\"120.0\" cy=\"30.0\" r=\"13\"/><circle cx=\"120.0\" cy=\"30.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:1\"><circle class=\"ds-led-glow\" cx=\"165.0\" cy=\"42.1\" r=\"13\"/><circle cx=\"165.0\" cy=\"42.1\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:2\"><circle class=\"ds-led-glow\" cx=\"197.9\" cy=\"75.0\" r=\"13\"/><circle cx=\"197.9\" cy=\"75.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:3\"><circle class=\"ds-led-glow\" cx=\"210.0\" cy=\"120.0\" r=\"13\"/><circle cx=\"210.0\" cy=\"120.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:4\"><circle class=\"ds-led-glow\" cx=\"197.9\" cy=\"165.0\" r=\"13\"/><circle cx=\"197.9\" cy=\"165.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:5\"><circle class=\"ds-led-glow\" cx=\"165.0\" cy=\"197.9\" r=\"13\"/><circle cx=\"165.0\" cy=\"197.9\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:6\"><circle class=\"ds-led-glow\" cx=\"120.0\" cy=\"210.0\" r=\"13\"/><circle cx=\"120.0\" cy=\"210.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:7\"><circle class=\"ds-led-glow\" cx=\"75.0\" cy=\"197.9\" r=\"13\"/><circle cx=\"75.0\" cy=\"197.9\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:8\"><circle class=\"ds-led-glow\" cx=\"42.1\" cy=\"165.0\" r=\"13\"/><circle cx=\"42.1\" cy=\"165.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:9\"><circle class=\"ds-led-glow\" cx=\"30.0\" cy=\"120.0\" r=\"13\"/><circle cx=\"30.0\" cy=\"120.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:10\"><circle class=\"ds-led-glow\" cx=\"42.1\" cy=\"75.0\" r=\"13\"/><circle cx=\"42.1\" cy=\"75.0\" r=\"4.1\"/></g><g class=\"ds-led\" style=\"--i:11\"><circle class=\"ds-led-glow\" cx=\"75.0\" cy=\"42.1\" r=\"13\"/><circle cx=\"75.0\" cy=\"42.1\" r=\"4.1\"/></g></g></svg></div>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-ring{width:220px;padding:1rem;background:var(--ground)}.ds-ring svg{display:block;width:100%;height:auto}.ds-led{fill:var(--hang);animation:ds-on .55s var(--ease) both;animation-delay:calc(var(--i)*45ms)}.ds-led-glow{filter:url(#ds-led-blur)}@keyframes ds-on{from{opacity:0}to{opacity:1}}@media (prefers-color-scheme: light){.ds-ring svg{filter:drop-shadow(0 14px 22px rgba(0,0,0,.18))}.ds-led-glow{opacity:.75}}@media (prefers-reduced-motion: reduce){.ds-led{animation:none}}"
+    },
+    {
+      "name": "Pixel Avatar",
+      "kind": "custom",
+      "refersTo": "avatar-tile",
+      "description": "A 12x12 one-bit face on a black tile, crisp edges, in both schemes. Ported from PixelAvatarView.",
+      "html": "<div class=\"ds-person\"><svg class=\"ds-avatar\" viewBox=\"-1.5 -1.5 15 15\" role=\"img\" aria-label=\"Pixel avatar\"><rect x=\"-1.5\" y=\"-1.5\" width=\"15\" height=\"15\" rx=\"2.5\" fill=\"#000\"/><g fill=\"#fff\"><rect x=\"3\" y=\"1\" width=\"6\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"3\" width=\"1\" height=\"5\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"5\"/><rect x=\"3\" y=\"4\" width=\"2\" height=\"2\"/><rect x=\"7\" y=\"4\" width=\"2\" height=\"2\"/><rect x=\"3\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"4\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"6\" height=\"1\"/></g></svg><div><h3>Grant, 7</h3><span class=\"ds-label\">User 1: Kids without phones</span></div></div>",
+      "css": ":host{--ground:#000;--card:#171717;--card-raised:#222;--line:#2b2b2b;--text:#fff;--quiet:#a3a3a3;--hang:#33d499;--quiet-mood:#a68cfa;--wave:#fabf24;--off:#383838;--action:#fff;--on-action:#000;--font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Heya Inter','Segoe UI',Roboto,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}@media (prefers-color-scheme: light){:host{--ground:#f2f2f7;--card:#fff;--card-raised:#ebebf0;--line:#d8d8de;--text:#000;--quiet:#5c5c61;--off:#c7c7cc;--action:#000;--on-action:#fff}}.ds-person{display:grid;grid-template-columns:auto 1fr;gap:.4rem 1rem;align-items:center;padding:1.25rem 1.4rem;background:var(--card);border-radius:22px;color:var(--text);font-family:var(--font)}.ds-avatar{width:56px;height:56px;display:block;shape-rendering:crispEdges}.ds-person h3{margin:0;font-size:1.3rem;font-weight:700}.ds-label{display:block;margin-top:.15rem;font-size:.75rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--quiet)}"
+    },
+    {
+      "name": "Wrapped: Chalk Button",
+      "kind": "button",
+      "refersTo": "wrapped-button-chalk",
+      "description": "[app/index.html only, Sidewalk Chalk] Default control: a drawn chalk outline, graphite text, tilts on hover.",
       "html": "<svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"ds-chalk-line\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\".9\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feTurbulence type=\"fractalNoise\" baseFrequency=\"1.4\" numOctaves=\"1\" seed=\"11\" result=\"g\"/><feColorMatrix in=\"g\" type=\"matrix\" values=\"0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45\" result=\"m\"/><feComposite in=\"d\" in2=\"m\" operator=\"in\"/></filter></svg><div class=\"ds-ground\"><button class=\"ds-chalk-btn\"><svg class=\"ds-box\" viewBox=\"0 0 100 46\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M5 4 Q50 2 96 5 Q98 22 95 42 Q50 44 4 41 Q2 22 5 4 L14 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\" filter=\"url(#ds-chalk-line)\"/></svg>Copy caption</button></div>",
       "css": ".ds-ground { background: #d5d2ca; color: #1f2124; padding: 24px; font: 17px/1.5 system-ui, sans-serif; } @media (prefers-color-scheme: dark) { .ds-ground { background: #2b2d30; color: #f1eee7; } } .ds-chalk-btn { position: relative; isolation: isolate; font: 600 1rem/1 system-ui, sans-serif; min-height: 46px; padding: 0 1.25rem; color: inherit; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; transition: transform .25s cubic-bezier(.16,1,.3,1); } .ds-chalk-btn svg.ds-box { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: -1; pointer-events: none; } .ds-chalk-btn:hover { transform: rotate(-1deg) translateY(-1px); } .ds-chalk-btn:focus-visible { outline: 3px dashed currentColor; outline-offset: 5px; border-radius: 6px; } .ds-chalk-btn:disabled { opacity: .45; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-chalk-btn { transition: none; } }"
     },
     {
-      "name": "Chalk Button, Pressed",
+      "name": "Wrapped: Chalk Button, Pressed",
       "kind": "button",
-      "refersTo": "button-chalk-pressed",
-      "description": "Selected toggle (wearer picker): outline filled with a graphite chalk scrub, text in ground colour.",
+      "refersTo": "wrapped-button-chalk-pressed",
+      "description": "[app/index.html only, Sidewalk Chalk] Selected toggle (wearer picker): outline filled with a graphite chalk scrub, text in ground colour.",
       "html": "<svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"ds-chalk-line\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\".9\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feTurbulence type=\"fractalNoise\" baseFrequency=\"1.4\" numOctaves=\"1\" seed=\"11\" result=\"g\"/><feColorMatrix in=\"g\" type=\"matrix\" values=\"0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45\" result=\"m\"/><feComposite in=\"d\" in2=\"m\" operator=\"in\"/></filter></svg><div class=\"ds-ground\"><button class=\"ds-chalk-btn ds-pressed\" aria-pressed=\"true\"><svg class=\"ds-box\" viewBox=\"0 0 100 46\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M6 40 L30 6 M18 42 L44 5 M32 42 L58 4 M46 42 L72 4 M60 42 L86 5 M74 41 L95 10 M86 41 L96 26\" stroke=\"currentColor\" stroke-width=\"14\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\" filter=\"url(#ds-chalk-line)\"/><path d=\"M5 4 Q50 2 96 5 Q98 22 95 42 Q50 44 4 41 Q2 22 5 4 L14 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\" filter=\"url(#ds-chalk-line)\"/></svg>Grant, 7 · with a parent</button></div>",
       "css": ".ds-ground { background: #d5d2ca; color: #1f2124; padding: 24px; font: 17px/1.5 system-ui, sans-serif; } @media (prefers-color-scheme: dark) { .ds-ground { background: #2b2d30; color: #f1eee7; } } .ds-chalk-btn { position: relative; isolation: isolate; font: 600 1rem/1 system-ui, sans-serif; min-height: 46px; padding: 0 1.25rem; color: inherit; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; transition: transform .25s cubic-bezier(.16,1,.3,1); } .ds-chalk-btn svg.ds-box { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: -1; pointer-events: none; } .ds-chalk-btn:hover { transform: rotate(-1deg) translateY(-1px); } .ds-chalk-btn:focus-visible { outline: 3px dashed currentColor; outline-offset: 5px; border-radius: 6px; } .ds-chalk-btn:disabled { opacity: .45; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-chalk-btn { transition: none; } } .ds-pressed { color: #d5d2ca; font-weight: 700; } @media (prefers-color-scheme: dark) { .ds-pressed { color: #2b2d30; } }"
     },
     {
-      "name": "Go Button",
+      "name": "Wrapped: Go Button",
       "kind": "button",
-      "refersTo": "button-go",
-      "description": "The one primary call to action per view ('Make my Wrapped'): display face 800, filled graphite scrub.",
+      "refersTo": "wrapped-button-go",
+      "description": "[app/index.html only, Sidewalk Chalk] The one primary call to action per view ('Make my Wrapped'): display face 800, filled graphite scrub.",
       "html": "<svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"ds-chalk-line\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\".9\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feTurbulence type=\"fractalNoise\" baseFrequency=\"1.4\" numOctaves=\"1\" seed=\"11\" result=\"g\"/><feColorMatrix in=\"g\" type=\"matrix\" values=\"0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45\" result=\"m\"/><feComposite in=\"d\" in2=\"m\" operator=\"in\"/></filter></svg><div class=\"ds-ground\"><button class=\"ds-chalk-btn ds-go\"><svg class=\"ds-box\" viewBox=\"0 0 100 46\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M6 40 L30 6 M18 42 L44 5 M32 42 L58 4 M46 42 L72 4 M60 42 L86 5 M74 41 L95 10 M86 41 L96 26\" stroke=\"currentColor\" stroke-width=\"14\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\" filter=\"url(#ds-chalk-line)\"/><path d=\"M5 4 Q50 2 96 5 Q98 22 95 42 Q50 44 4 41 Q2 22 5 4 L14 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\" filter=\"url(#ds-chalk-line)\"/></svg>Make my Wrapped</button></div>",
       "css": ".ds-ground { background: #d5d2ca; color: #1f2124; padding: 24px; font: 17px/1.5 system-ui, sans-serif; } @media (prefers-color-scheme: dark) { .ds-ground { background: #2b2d30; color: #f1eee7; } } .ds-chalk-btn { position: relative; isolation: isolate; font: 600 1rem/1 system-ui, sans-serif; min-height: 46px; padding: 0 1.25rem; color: inherit; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; transition: transform .25s cubic-bezier(.16,1,.3,1); } .ds-chalk-btn svg.ds-box { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: -1; pointer-events: none; } .ds-chalk-btn:hover { transform: rotate(-1deg) translateY(-1px); } .ds-chalk-btn:focus-visible { outline: 3px dashed currentColor; outline-offset: 5px; border-radius: 6px; } .ds-chalk-btn:disabled { opacity: .45; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-chalk-btn { transition: none; } } .ds-go { font: 800 1.3rem/1 'Bricolage Grotesque', system-ui, sans-serif; min-height: 62px; padding: 0 1.7rem; color: #d5d2ca; } @media (prefers-color-scheme: dark) { .ds-go { color: #2b2d30; } }"
     },
     {
-      "name": "Mood Card Slab",
+      "name": "Wrapped: Mood Card Slab",
       "kind": "card",
-      "refersTo": "card-slab",
-      "description": "A Wrapped card scrubbed in one mood chalk; the edge is stroke ends, text in slab ink, mood named in text.",
+      "refersTo": "wrapped-card-slab",
+      "description": "[app/index.html only, Sidewalk Chalk] A Wrapped card scrubbed in one mood chalk; the edge is stroke ends, text in slab ink, mood named in text.",
       "html": "<svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"ds-chalk-line\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\".9\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feTurbulence type=\"fractalNoise\" baseFrequency=\"1.4\" numOctaves=\"1\" seed=\"11\" result=\"g\"/><feColorMatrix in=\"g\" type=\"matrix\" values=\"0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45\" result=\"m\"/><feComposite in=\"d\" in2=\"m\" operator=\"in\"/></filter></svg><div class=\"ds-ground\"><article class=\"ds-slab\"><svg class=\"ds-slab-bg\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><g filter=\"url(#ds-chalk-line)\" stroke=\"#69d99a\" stroke-width=\"16\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\"><path d=\"M4 30 L30 4 M4 52 L52 4 M4 74 L74 4 M5 96 L96 5 M26 96 L96 26 M48 96 L96 48 M70 96 L96 70\" vector-effect=\"non-scaling-stroke\"/></g></svg><p class=\"ds-big\">Maya</p><h3 class=\"ds-title\">Your favorite person to tap</h3><p class=\"ds-body\">You and Maya tapped 41 times this year.</p><p class=\"ds-tag\">Mostly \"Let's hang\" together</p></article></div>",
       "css": ".ds-ground { background: #d5d2ca; color: #1f2124; padding: 24px; font: 17px/1.5 system-ui, sans-serif; } @media (prefers-color-scheme: dark) { .ds-ground { background: #2b2d30; color: #f1eee7; } } .ds-slab { position: relative; isolation: isolate; max-width: 20rem; padding: 2rem 1.9rem 1.6rem; color: #18191b; display: flex; flex-direction: column; gap: .8rem; } .ds-slab-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; } .ds-big { margin: 0; font: 800 3rem/.95 'Bricolage Grotesque', system-ui, sans-serif; letter-spacing: -0.03em; } .ds-title { margin: 0; font: 700 1.5rem/1.15 'Bricolage Grotesque', system-ui, sans-serif; } .ds-body { margin: 0; font-size: 1.05rem; max-width: 34ch; } .ds-tag { margin: 0; font-weight: 700; font-size: .95rem; }"
     },
     {
-      "name": "Hopscotch Square",
+      "name": "Wrapped: Hopscotch Square",
       "kind": "nav",
-      "refersTo": "hop-square",
-      "description": "Signature navigation: numbered chalk squares; the current one is scrubbed in with its card's chalk.",
+      "refersTo": "wrapped-hop-square",
+      "description": "[app/index.html only, Sidewalk Chalk] Signature navigation: numbered chalk squares; the current one is scrubbed in with its card's chalk.",
       "html": "<svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"ds-chalk-line\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\".9\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feTurbulence type=\"fractalNoise\" baseFrequency=\"1.4\" numOctaves=\"1\" seed=\"11\" result=\"g\"/><feColorMatrix in=\"g\" type=\"matrix\" values=\"0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45\" result=\"m\"/><feComposite in=\"d\" in2=\"m\" operator=\"in\"/></filter></svg><div class=\"ds-ground\"><nav class=\"ds-hop\" aria-label=\"Wrapped squares\"><button class=\"ds-sq ds-cur\" aria-current=\"step\"><svg viewBox=\"0 0 66 66\" aria-hidden=\"true\"><path d=\"M8 50 L34 8 M16 58 L54 10 M30 58 L58 26\" stroke=\"#b39bff\" stroke-width=\"12\" stroke-linecap=\"round\" filter=\"url(#ds-chalk-line)\"/><path d=\"M5 4 Q33 2 62 5 Q64 33 61 62 Q33 63 4 61 Q2 33 5 4 L14 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#ds-chalk-line)\"/></svg><span>2</span></button><button class=\"ds-sq\"><svg viewBox=\"0 0 66 66\" aria-hidden=\"true\"><path d=\"M4 5 Q33 3 61 4 Q63 33 62 61 Q33 64 5 62 Q3 33 4 5 L13 5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" filter=\"url(#ds-chalk-line)\"/></svg><span>3</span></button></nav></div>",
       "css": ".ds-ground { background: #d5d2ca; color: #1f2124; padding: 24px; font: 17px/1.5 system-ui, sans-serif; } @media (prefers-color-scheme: dark) { .ds-ground { background: #2b2d30; color: #f1eee7; } } .ds-hop { display: flex; gap: 8px; } .ds-sq { position: relative; width: 66px; height: 66px; padding: 0; border: 0; background: none; cursor: pointer; color: inherit; font: 800 1.6rem/1 'Bricolage Grotesque', system-ui, sans-serif; } .ds-sq svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; } .ds-sq span { position: relative; } .ds-cur span { color: #18191b; } .ds-sq:focus-visible { outline: 3px dashed currentColor; outline-offset: 5px; border-radius: 6px; }"
     },
     {
-      "name": "Mood Tag",
+      "name": "Wrapped: Mood Tag",
       "kind": "chip",
-      "refersTo": "",
-      "description": "A rough chalk circle in mood chalk, outlined in slab ink, always beside the mood's name.",
+      "refersTo": "wrapped-",
+      "description": "[app/index.html only, Sidewalk Chalk] A rough chalk circle in mood chalk, outlined in slab ink, always beside the mood's name.",
       "html": "<svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"ds-chalk-line\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\".9\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feTurbulence type=\"fractalNoise\" baseFrequency=\"1.4\" numOctaves=\"1\" seed=\"11\" result=\"g\"/><feColorMatrix in=\"g\" type=\"matrix\" values=\"0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45\" result=\"m\"/><feComposite in=\"d\" in2=\"m\" operator=\"in\"/></filter></svg><div class=\"ds-ground\"><p class=\"ds-mood\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M10 2.6 Q16.8 2.4 17.4 9.6 Q17.2 17.3 10 17.5 Q2.7 17.2 2.5 10.2 Q2.9 2.9 10.6 2.4\" fill=\"#ffd25a\" stroke=\"#18191b\" stroke-width=\"2\" filter=\"url(#ds-chalk-line)\"/></svg>Busy, but wave</p></div>",
       "css": ".ds-ground { background: #d5d2ca; color: #1f2124; padding: 24px; font: 17px/1.5 system-ui, sans-serif; } @media (prefers-color-scheme: dark) { .ds-ground { background: #2b2d30; color: #f1eee7; } } .ds-mood { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; font-size: .95rem; margin: 0; }"
     },
     {
-      "name": "Chalk Tallies",
+      "name": "Wrapped: Chalk Tallies",
       "kind": "custom",
-      "refersTo": "",
-      "description": "Counts drawn as tally groups (four uprights, a diagonal fifth) in line colour, captioned.",
+      "refersTo": "wrapped-",
+      "description": "[app/index.html only, Sidewalk Chalk] Counts drawn as tally groups (four uprights, a diagonal fifth) in line colour, captioned.",
       "html": "<svg width=\"0\" height=\"0\" style=\"position:absolute\"><filter id=\"ds-chalk-line\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\"><feTurbulence type=\"fractalNoise\" baseFrequency=\".9\" numOctaves=\"2\" seed=\"3\" result=\"n\"/><feDisplacementMap in=\"SourceGraphic\" in2=\"n\" scale=\"3\" xChannelSelector=\"R\" yChannelSelector=\"G\" result=\"d\"/><feTurbulence type=\"fractalNoise\" baseFrequency=\"1.4\" numOctaves=\"1\" seed=\"11\" result=\"g\"/><feColorMatrix in=\"g\" type=\"matrix\" values=\"0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.45\" result=\"m\"/><feComposite in=\"d\" in2=\"m\" operator=\"in\"/></filter></svg><div class=\"ds-ground\"><figure class=\"ds-tally\"><svg viewBox=\"0 0 70 46\" aria-hidden=\"true\"><g stroke=\"currentColor\" stroke-width=\"3.5\" stroke-linecap=\"round\" fill=\"none\" filter=\"url(#ds-chalk-line)\"><path d=\"M4 4 L5 42\"/><path d=\"M14 5 L14 41\"/><path d=\"M24 4 L25 42\"/><path d=\"M34 5 L34 41\"/><path d=\"M-1 38 L41 6\"/><path d=\"M54 4 L55 42\"/></g></svg><figcaption>6 friends</figcaption></figure></div>",
       "css": ".ds-ground { background: #d5d2ca; color: #1f2124; padding: 24px; font: 17px/1.5 system-ui, sans-serif; } @media (prefers-color-scheme: dark) { .ds-ground { background: #2b2d30; color: #f1eee7; } } .ds-tally { margin: 0; } .ds-tally svg { display: block; height: 46px; width: auto; overflow: visible; } .ds-tally figcaption { font-size: .9rem; font-weight: 600; opacity: .85; }"
     }
   ],
   "narrative": {
-    "northStar": "Sidewalk Chalk",
-    "overview": "Your year of hangouts is drawn in chalk on the ground where it happened. The ground is pavement: sunlit pale concrete in light mode, charcoal asphalt with stone speckle in dark. Everything that is drawn (outlines, tallies, circled names, arrows, the year band, card fills, the hopscotch) is chalk, rendered as rough SVG strokes passed through turbulence filters so edges wobble and pavement pits show through. Nothing is a clean vector box, nothing glows, and nothing is a gradient.\n\nThe page is paged like a story, but the story is a hopscotch: numbered chalk squares on the left, the current one scrubbed in with chalk, and the current card at phone scale beside it. Each card is a chalked rectangle committed to one chalk colour, and that colour carries a mood when the card is about a mood. Hierarchy comes from scale in one display face, never from extra faces or decoration. Lines draw themselves in when a card arrives and are already drawn under reduced motion.\n\nThe world refuses the category default for year-in-review: full-bleed gradient story slides with giant neon numbers. It should feel like something a kid and a parent chalked after playing outside, not something built to keep you scrolling. Scope: this system covers the Wrapped app (`app/`). The product page (`docs/index.html`) is an older, separate surface that stays on its own plain style.",
+    "northStar": "The Band, Lit",
+    "overview": "Heya's screens look like the iPhone app: a pure black ground, near-black rounded cards that sit on it without borders or shadows, white text at bold weights, and quiet gray for everything secondary. The surface stays dark and calm so the one thing that glows is the band. The 12-LED brushed-metal ring is the product's light, and on a surface that shows it, it is the hero. Color does not appear anywhere else unless it means a mood.\n\nDensity is the app's: generous black space around a single reading column, cards for anything that is a unit (a person, a poll, a table, a notice), and pill controls a thumb could hit. People are drawn as 12x12 one-bit pixel avatars on black tiles, never photos or illustrations. Hierarchy comes from size and weight in the system face (SF Pro on Apple devices, a self-hosted Inter elsewhere), not from extra faces, ornaments or color.\n\nThe app itself is dark-only. The web is not allowed to be: the project requires light mode, so the system carries an iOS grouped-gray light version (light ground, white cards, black text and actions) with the same structure and the same mood colors.",
     "keyCharacteristics": [
-      "Pavement ground with SVG-noise aggregate in both colour schemes; chalk does all the drawing.",
-      "Every outline is a hand-wobbled path through a chalk filter; no CSS borders on world elements.",
-      "Three mood chalks plus white and graphite chalk. Mood chalk always means a mood.",
-      "One display face (Bricolage Grotesque) with chalk-textured lettering; system UI for controls and body.",
-      "Hopscotch navigation as the signature interaction; arrows and keys work too.",
-      "Draw-in motion on arrival, fully pre-drawn under reduced motion."
+      "Pure black ground (iOS grouped gray in light mode), #171717-style cards at a 22px radius, no shadows on cards.",
+      "One system face (SF Pro, Inter fallback) at bold display weights; quiet gray secondary text.",
+      "The 12-LED brushed-metal ring with blurred LED glow is the signature object and the only light source.",
+      "Mood colors only where a mood is meant: the selected mood pill, mood dots and ring LEDs, always next to the mood's name.",
+      "Neutral actions are a solid white pill in dark mode and a solid black pill in light mode.",
+      "12x12 one-bit pixel avatars on black tiles stand for people.",
+      "Small uppercase tracked labels name content; they are never kickers above headings."
     ],
     "rules": [
       {
-        "name": "The Mood Chalk Rule",
-        "body": "Green, purple and yellow mean Let's hang, Quiet company and Busy, but wave, and nothing else. A slab, square, swatch or marker takes a mood chalk only when the data under it is that mood. Cards and squares with no mood are white chalk. A mood colour is always paired with the mood's name in text.",
+        "name": "The Mood Color Rule",
+        "body": "Green, lilac, marigold and Off gray mean Let's hang, Quiet company, Busy but wave, and Off. They are always shown with the mood's name in text, and the only mood-color fills are the selected mood pill, mood dots and ring LEDs. No mood color on headings, links, labels, borders, backgrounds or icons.",
         "section": "colors"
       },
       {
-        "name": "The Same-Chalk Swatch Rule",
-        "body": "A mood swatch that sits on a slab of its own mood is scribbled in slab ink instead, so it never disappears into the slab.",
+        "name": "The Neutral Action Rule",
+        "body": "A neutral action or a selected non-mood option fills with the text color (white on dark, black on light), never with a mood color.",
         "section": "colors"
       },
       {
-        "name": "The Ground Is Pavement Rule",
-        "body": "The page background is always ground colour plus aggregate texture. Never a flat fill, a gradient, or a white page.",
+        "name": "The Light Mode Is Required Rule",
+        "body": "Every surface ships both schemes. Light mode swaps grounds, cards, lines, text and actions; mood colors, the metal, and the black avatar tiles stay the same.",
         "section": "colors"
       },
       {
-        "name": "The One Chalk Face Rule",
-        "body": "Bricolage Grotesque is the only display face. Hierarchy comes from scale and weight, not from a second face or decorative styling.",
+        "name": "The One Face Rule",
+        "body": "The system face does everything. Hierarchy is size and weight; no second display face, no italic display, no decorative type.",
         "section": "typography"
       },
       {
-        "name": "The Chalk Lettering Rule",
-        "body": "Display and headline type carry the heavier chalk-text filter; titles, side headings and captions in the display face carry the lite filter. System-UI text is never filtered.",
+        "name": "The Label Names Content Rule",
+        "body": "An uppercase tracked label is the name of the thing it sits on or beside (a table header, a card subsection, a person's group). It never floats above a heading as a kicker or eyebrow.",
         "section": "typography"
       },
       {
-        "name": "The Same-Ground Rule",
-        "body": "Chalk lies on the ground. It never casts a shadow and never floats above another layer.",
+        "name": "The Only Light Rule",
+        "body": "The band is the only thing that glows. No glows, gradients or shadows on cards, text or controls; the metal gradient exists only on the ring.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** draw every outline and figure as a rough path through the chalk-line filter, sized to the element and seeded, so it never jumps on redraw.",
-      "**Do** commit each card to exactly one chalk: its mood's chalk if the card is about a mood, white chalk otherwise.",
-      "**Do** pair every mood colour with the mood's name in text.",
-      "**Do** keep the ground as ground colour plus aggregate texture in both colour schemes.",
-      "**Do** let chalk lines draw in on arrival (0.8s, cubic-bezier(.16, 1, .3, 1)) and render them already drawn under prefers-reduced-motion.",
-      "**Do** use Bricolage Grotesque for chalked lettering and system UI for controls and body, with hierarchy by scale."
+      "**Do** use mood colors only for the selected mood pill, mood dots and ring LEDs, and always with the mood's name.",
+      "**Do** fill neutral actions and selected non-mood pills with the text color (white on dark, black on light).",
+      "**Do** keep the ground flat black (iOS grouped gray in light mode) and put units of content on 22px cards with no shadow.",
+      "**Do** ship light mode and dark mode on every surface, even though the iOS app is dark-only.",
+      "**Do** let the ring's LED glow be the only glow on the page.",
+      "**Do** use SF Pro (Heya Inter fallback) for everything, with hierarchy by size and weight.",
+      "**Do** use uppercase tracked labels (0.75rem, 600, 0.09em, quiet) to name content: table columns, card subsections, a person's group.",
+      "**Do** draw people as 12x12 one-bit pixel avatars on black tiles.",
+      "**Do** honor prefers-reduced-motion: no chase, no breathing, no transitions."
     ],
     "donts": [
-      "**Don't** use green, purple or yellow decoratively. They mean Let's hang, Quiet company and Busy, but wave.",
-      "**Don't** use full-bleed gradient story slides, giant neon numbers, or anything that reads as Spotify Wrapped.",
-      "**Don't** put CSS borders, border-radius boxes or drop shadows on chalk elements. Chalk lies flat on the ground.",
-      "**Don't** add a second display face or render display text without the chalk filter.",
-      "**Don't** show locations, maps or sharing on a kid's Wrapped."
+      "**Don't** use green, lilac, marigold or Off gray on headings, links, labels, borders, backgrounds or as decoration.",
+      "**Don't** put an uppercase label above a heading as a kicker or eyebrow.",
+      "**Don't** add shadows, glows or gradients to cards, text or controls; the metal gradient and LED glow belong to the band alone.",
+      "**Don't** add a second typeface or a decorative display face.",
+      "**Don't** use photos or illustrated characters for people; use pixel avatars.",
+      "**Don't** carry Sidewalk Chalk (rough strokes, chalk filters, pavement texture, Bricolage Grotesque) onto any surface other than the Wrapped app."
     ]
   }
 }
