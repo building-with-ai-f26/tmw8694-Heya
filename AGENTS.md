@@ -22,6 +22,7 @@ Guidance for AI coding agents (and people) working in this repository.
 | `app/index.html` | Heya Wrapped page: Grant (kid) and Faith (adult) recaps, hopscotch navigation, map, share image. |
 | `app/data/grant.json`, `app/data/faith.json` | Demo tap history (fictional people, Jan 1 – Nov 15, 2026). |
 | `app/fonts/` | Self-hosted Bricolage Grotesque (SIL Open Font License; see `README.txt`). |
+| `ios/Heya.xcodeproj` | iPhone app that runs the same Wrapped page. The Swift server in `ios/Heya/` replaces `app/server.py` on the device. |
 | `ROADMAP.md` | Shared plan and priorities for Tara and Jorge. |
 | `.env.example` | Template for the secret settings. Copy to `.env`. |
 | `PRODUCT.md`, `DESIGN.md`, `.impeccable/` | Product and design records from the impeccable design plugin. `.impeccable/review/`, `questions/` and `mocks/` are local only and ignore themselves. |
@@ -45,6 +46,16 @@ Requirements: Python 3.9+ (nothing to install) and an OpenRouter API key.
 Optional settings in `.env`: `HEYA_MODEL` (default `anthropic/claude-haiku-5.5`) and `PORT` (default `8000`).
 
 Demo links for screenshots: `http://localhost:8000/?wearer=faith&auto=1&card=2` opens Faith's Wrapped on square 3 (cards count from 0). When capturing with headless Chrome, add `--force-prefers-reduced-motion` so cards aren't caught mid-animation.
+
+## Open the iPhone app in Xcode
+
+The page, fonts, and tap files stay in `app/`. The Xcode app loads them in a web view and serves `/api/stats` and `/api/wrapped` from Swift, with the same rules: the server computes every number, and the model only writes the words. Grant still has no locations and no share card.
+
+```sh
+open ios/Heya.xcodeproj
+```
+
+Pick an iPhone simulator and press Run. The build copies `.env` into the app so the OpenRouter key stays out of git and out of the Swift source. The key is only inside that local build. A phone install needs an Apple developer team selected under Signing & Capabilities.
 
 ## How the AI call works
 

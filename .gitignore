@@ -4,3 +4,8 @@
 # OS / editor
 .DS_Store
 __pycache__/
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
