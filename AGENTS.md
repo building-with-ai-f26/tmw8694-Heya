@@ -8,6 +8,7 @@ Guidance for AI coding agents (and people) working in this repository.
 - **Context:** Building with AI, Fall 2026 (`building-with-ai-f26`)
 - **Repo:** https://github.com/building-with-ai-f26/tmw8694-Heya
 - **Product page:** https://building-with-ai-f26.github.io/tmw8694-Heya/ (GitHub Pages, served from `docs/` on `main`)
+- **Current priorities:** `ROADMAP.md` (Xcode proximity spike first; bracelet vs. phone/watch question).
 - **Product truth:** `PRODUCT.md` (users, purpose, privacy rules). **Visual system** for the Wrapped app: `DESIGN.md`.
 
 ## Structure
@@ -21,6 +22,7 @@ Guidance for AI coding agents (and people) working in this repository.
 | `app/index.html` | Heya Wrapped page: Grant (kid) and Faith (adult) recaps, hopscotch navigation, map, share image. |
 | `app/data/grant.json`, `app/data/faith.json` | Demo tap history (fictional people, Jan 1 – Nov 15, 2026). |
 | `app/fonts/` | Self-hosted Bricolage Grotesque (SIL Open Font License; see `README.txt`). |
+| `ROADMAP.md` | Shared plan and priorities for Tara and Jorge. |
 | `.env.example` | Template for the secret settings. Copy to `.env`. |
 | `PRODUCT.md`, `DESIGN.md`, `.impeccable/` | Product and design records from the impeccable design plugin. `.impeccable/review/`, `questions/` and `mocks/` are local only and ignore themselves. |
 
@@ -61,7 +63,7 @@ Demo links for screenshots: `http://localhost:8000/?wearer=faith&auto=1&card=2` 
 
 - The PostHog web snippet is in the `<head>` of `docs/index.html`, `docs/prototype.html` and `app/index.html`. It uses the **public project token** (`phc_…`) and the US host. Never use a personal API key in client code.
 - Pageviews, autocaptured clicks and session replay are on. Every page shows a "Heads up, testers" notice; keep it.
-- Named events: the prototype sends `mood_changed`, `bracelets_paired`, `bracelets_tapped`, `next_day`, `scenario_switched` and `prototype_reset`. Wrapped sends `wrapped_requested`, `wrapped_generated` (with cost), `wrapped_failed`, `wrapped_card_viewed`, `wrapped_completed`, `hopscotch_hop`, `wrapped_shared`, `caption_copied` and `wearer_switched`.
+- Named events: the prototype sends `mood_changed`, `bracelets_paired`, `bracelets_tapped`, `next_day`, `scenario_switched` and `prototype_reset`. Wrapped sends `wrapped_requested`, `wrapped_generated` (with cost), `wrapped_failed`, `wrapped_card_viewed`, `wrapped_completed`, `hopscotch_hop`, `wrapped_shared`, `caption_copied` and `wearer_switched`. The product page poll sends `device_preference_answered` (`choice`: `bracelet`, `phone_app` or `apple_watch`).
 
 ## Working rules
 

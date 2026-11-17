@@ -126,6 +126,22 @@
     h3 { margin-top: 1.75rem; }
     figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted); }
     footer { margin-top: 3rem; font-size: 0.875rem; color: var(--muted); }
+    .poll h2 { margin-top: 0; border: 0; padding: 0; font-size: 1.25rem; }
+    .poll-options { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.75rem 0 0.25rem; }
+    .poll-options button {
+      font: inherit;
+      font-weight: 600;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .poll-options button:hover { border-color: var(--accent); }
+    .poll-options button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .poll-options button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+    .poll-thanks { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--muted); min-height: 1.5em; }
   </style>
 </head>
 <body>
@@ -137,6 +153,40 @@
       <a class="button" id="demo-button" href="prototype.html">Try the prototype</a>
       <p class="notice" role="note"><strong>Heads up, testers:</strong> this page uses PostHog to record your visit, what you click, and a session replay (a playback of your mouse movements and clicks) so I can see how people use Heya. Anything typed into form fields is hidden, and no names or emails are collected.</p>
     </header>
+
+    <section class="card poll" aria-labelledby="poll-title">
+      <h2 id="poll-title">Quick question: how would you use Heya?</h2>
+      <p>If you already have a phone, would you wear a separate Heya bracelet, or would you rather get Heya as an app? Pick one; it helps decide what to build next.</p>
+      <div class="poll-options" role="group" aria-labelledby="poll-title">
+        <button type="button" data-choice="bracelet" aria-pressed="false">I'd wear the bracelet</button>
+        <button type="button" data-choice="phone_app" aria-pressed="false">Just the app on my phone</button>
+        <button type="button" data-choice="apple_watch" aria-pressed="false">An Apple Watch app</button>
+      </div>
+      <p class="poll-thanks" id="poll-thanks" aria-live="polite"></p>
+    </section>
+    <script>
+      (function () {
+        var KEY = 'heya_device_poll';
+        var buttons = document.querySelectorAll('.poll-options button');
+        var thanks = document.getElementById('poll-thanks');
+        function show(choice) {
+          buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.choice === choice)); });
+          thanks.textContent = choice ? 'Thanks! Your answer is saved. Tap another option to change it.' : '';
+        }
+        var saved = null;
+        try { saved = localStorage.getItem(KEY); } catch (e) {}
+        show(saved);
+        buttons.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var choice = b.dataset.choice;
+            var previous = null;
+            try { previous = localStorage.getItem(KEY); localStorage.setItem(KEY, choice); } catch (e) {}
+            if (window.posthog) posthog.capture('device_preference_answered', { choice: choice, changed_from: previous });
+            show(choice);
+          });
+        });
+      })();
+    </script>
 
     <section aria-labelledby="prd2">
       <h2 id="prd2">PRD v2: Heya Wrapped</h2>
@@ -405,6 +455,7 @@
         <li>How does a bracelet with no phone report its location to parents? Through built-in GPS and cellular, or through Wi-Fi/Bluetooth relays? This decides battery life, cost, and how slim the bracelet can be.</li>
         <li>Where does Grant see his stats page: on a parent's phone, on a family tablet, or in a simple view on the bracelet itself?</li>
         <li>Can a kid account turn into a phone account when the kid gets a phone, and does their tap history carry over?</li>
+        <li>Should the bracelet exist only for phone-less kids, while adults get Heya as an iPhone and Apple Watch app? A bracelet's glow can be seen by friends; a watch only alerts the wearer. The poll at the top of this page (PostHog event <code>device_preference_answered</code>) is the first test.</li>
       </ul>
     </section>
 
