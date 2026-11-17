@@ -23,6 +23,8 @@ Guidance for AI coding agents (and people) working in this repository.
 | `app/data/grant.json`, `app/data/faith.json` | Demo tap history (fictional people, Jan 1 – Nov 15, 2026). |
 | `app/fonts/` | Self-hosted Bricolage Grotesque (SIL Open Font License; see `README.txt`). |
 | `ios/Heya.xcodeproj` | iPhone app that runs the same Wrapped page. The Swift server in `ios/Heya/` replaces `app/server.py` on the device. |
+| `ios-native/Heya.swiftpm` | Tara's native SwiftUI app (Look, Places, Friends, You) with real Bluetooth friend-finding, bump-to-tap and Demo mode. Open the `.swiftpm` folder in Xcode. Separate from `ios/`. |
+| `ios-native/TEST-PLAN.md` | Two-phone Bluetooth test plan for Tara and Jorge. |
 | `ROADMAP.md` | Shared plan and priorities for Tara and Jorge. |
 | `.env.example` | Template for the secret settings. Copy to `.env`. |
 | `PRODUCT.md`, `DESIGN.md`, `.impeccable/` | Product and design records from the impeccable design plugin. `.impeccable/review/`, `questions/` and `mocks/` are local only and ignore themselves. |

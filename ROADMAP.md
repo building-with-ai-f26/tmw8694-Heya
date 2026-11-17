@@ -15,6 +15,8 @@ This matters more now: if adults use the app instead of a bracelet, the phone an
 
 Goal: two iPhones (and then Watches) standing in for two bracelets.
 
+Start from Tara's native app in `ios-native/Heya.swiftpm`: it already advertises and scans over Bluetooth, estimates distance from signal strength, and saves a tap when phones bump. Run `ios-native/TEST-PLAN.md` first to see what holds up on real phones.
+
 - [ ] Detect a paired friend nearby over Bluetooth LE and show signal strength ("warmer, warmer").
 - [ ] Trigger a "pulse" (haptic + screen color) when the two devices are very close.
 - [ ] Save a "tap" when the devices touch or bump, like bracelets tapping.
