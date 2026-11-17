@@ -20,9 +20,9 @@ Guidance for AI coding agents (and people) working in this repository.
 | `docs/images/` | Screenshots used on the product page. |
 | `docs/fonts/` | Self-hosted Inter (SIL Open Font License, `OFL.txt`): the product page's fallback for SF Pro on Windows and Android. |
 | `app/server.py` | Heya Wrapped local server (Python standard library only). Serves the app, computes stats, makes the AI call. |
-| `app/index.html` | Heya Wrapped page: Grant (kid) and Faith (adult) recaps, hopscotch navigation, map, share image. |
+| `app/index.html` | Heya Wrapped page in the app look: Grant (kid) and Faith (adult) recaps, the LED ring as the card dial, map, share image. |
 | `app/data/grant.json`, `app/data/faith.json` | Demo tap history (fictional people, Jan 1 – Nov 15, 2026). |
-| `app/fonts/` | Self-hosted Bricolage Grotesque (SIL Open Font License; see `README.txt`). |
+| `app/fonts/` | Self-hosted Inter (`Inter-OFL.txt`), the SF Pro fallback. Bricolage Grotesque is from the old chalk look and no longer used. |
 | `ios/Heya.xcodeproj` | iPhone app that runs the same Wrapped page. The Swift server in `ios/Heya/` replaces `app/server.py` on the device. |
 | `ios-native/Heya.swiftpm` | Tara's native SwiftUI app (Look, Places, Friends, You) with real Bluetooth friend-finding, bump-to-tap and Demo mode. Open the `.swiftpm` folder in Xcode. Separate from `ios/`. |
 | `ios-native/TEST-PLAN.md` | Two-phone Bluetooth test plan for Tara and Jorge. |

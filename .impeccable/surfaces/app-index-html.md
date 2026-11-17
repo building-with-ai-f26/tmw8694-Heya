@@ -9,18 +9,18 @@ related_targets: []
 
 Scope: app/index.html, the Wrapped recap for Grant (kid, read with a parent on the parent's phone) and Faith (adult, with map and share card). Visitor mode: Experience.
 
-Job: flip through a year of real-life hangouts; kids leave wanting to see friends, adults leave wanting to share and go out. Must keep: mood colors mean moods (green let's hang, purple quiet company, yellow busy but wave). Avoid: screen-y/addictive energy, anything that looks like Spotify Wrapped.
+Job: flip through a year of real-life hangouts; kids leave wanting to see friends, adults leave wanting to share and go out. Must keep: mood colors mean moods (green let's hang, purple quiet company, yellow busy but wave). Avoid: screen-y/addictive energy, anything that looks like Spotify Wrapped. Keep: /api/stats and /api/wrapped calls, PostHog events, demo URL params, Leaflet map, share image, kid privacy (no map, no sharing for Grant).
 
 ## Direction contract
 
-THESIS: Your year of hangouts is drawn in chalk on the ground where it happened. Refuses the category default of full-bleed gradient story slides with giant neon numbers.
+THESIS: Your year plays back on the Heya band itself: the app's 12-LED ring is the story's progress dial, lighting each card's LEDs in the mood behind it. Refuses full-bleed gradient story slides with giant neon numbers, and replaces the retired Sidewalk Chalk hopscotch.
 
-OWN-WORLD: Ground is pavement: sunlit pale concrete in light mode, charcoal asphalt with stone speckle in dark. Chalk in the three mood colors plus white/graphite chalk does all drawing: dusty, rough-edged strokes, tally marks, circled names, arrows. One bold grotesque display face given chalk texture; system UI for controls. Cards are chalked rectangles on the pavement, each committed to one mood chalk.
+OWN-WORLD: The Heya app look from DESIGN.md: black ground (#f2f2f7 in light), #171717 cards at 22px, #2b2b2b hairlines, quiet #a3a3a3 text, SF Pro (Heya Inter fallback), brushed-metal ring with LED glow, mood-filled pills only for moods, neutral white/black action pill, 12x12 one-bit pixel avatars on black tiles, app-style friend rows. Colour appears only where it means a mood.
 
-STORY: The visitor sees their real numbers drawn like someone chalked them after playing outside, hops square to square, and ends wanting to go back outside (kid) or share the drawing (adult).
+STORY: The visitor picks Grant or Faith, sees the year so far, presses Make my Wrapped, watches the LEDs chase while the AI writes, then steps around the ring card by card; Faith ends at her map and a shareable image of her lit band.
 
-FIRST VIEWPORT: Left: a chalked hopscotch column of numbered squares (1 = title, then each card); the current square filled. Right/centre: the current card at phone scale, big chalk number, headline, body. "Make my Wrapped" is a chalk-outlined slab above, with the year's facts in chalk tallies. On phones the hopscotch becomes a horizontal hop row above the card.
+FIRST VIEWPORT: Desktop: large "Heya Wrapped" title and a two-pill wearer switch; below, left the ring dial (about 240px) with "1 of 6" in its centre and Back/Next pills under it; centre the current card at phone width (cover: sentence with real numbers, stat rows, month bars, white "Make my Wrapped" pill); right the family note, or map and share cards. Phone: ring at about 150px above the card.
 
-FORM: Sidewalk chalk on pavement, candidate 6 of 7 grounded list (assigned). seed:7721f0560c20be89. Raises: one mood chalk owns each card (seedbed); year as one chalk timeline band Jan–Nov (night city); chalk lines draw in on arrival, pre-drawn under reduced motion (zine); one display face, hierarchy by scale (phosphor). Signature interaction: hopping the hopscotch squares advances the story (also arrows/keys).
+FORM: seed: none (pinned). "restyle the wrapped page so that it matches the aesthetics of the app"; user chose "The ring is the progress dial". Signature interaction: tapping a ring segment jumps to that card; LEDs chase while the AI writes.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
