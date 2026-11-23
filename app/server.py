@@ -12,10 +12,13 @@ Run:  python3 app/server.py      then open http://localhost:8000
 
 import json
 import os
+import posixpath
+import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
-from collections import Counter
+from collections import Counter, deque
 from datetime import date, timedelta
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -28,6 +31,49 @@ OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 PRICES = {"anthropic/claude-haiku-5.5": (0.10, 0.50)}
 MOOD_NAMES = {"hang": "Let's hang", "quiet": "Quiet company", "wave": "Busy, but wave"}
 WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+# Only these files are ever served. Everything else (server.py, data/, .env, folder listings) is 404.
+PUBLIC_FILES = {"/": "index.html", "/index.html": "index.html"}
+PUBLIC_FILES.update({f"/fonts/{p.name}": f"fonts/{p.name}"
+                     for p in (APP_DIR / "fonts").glob("*") if p.suffix in (".woff2", ".txt")})
+MAX_BODY = 1024  # bytes; the only valid body is {"wearer": "..."}
+
+
+class RateLimiter:
+    """In-memory sliding-window limits on the paid AI route.
+
+    Per visitor: RATE_LIMIT_PER_VISITOR calls per RATE_WINDOW_SECONDS.
+    Whole site: DAILY_AI_CAP calls per 24 hours, a backstop on spending even if
+    someone rotates IPs. Counters reset when the server restarts.
+    """
+
+    def __init__(self):
+        self.per_visitor = int(os.environ.get("RATE_LIMIT_PER_VISITOR", "10"))
+        self.window = int(os.environ.get("RATE_WINDOW_SECONDS", "600"))
+        self.daily_cap = int(os.environ.get("DAILY_AI_CAP", "300"))
+        self.hits, self.all_hits, self.lock = {}, deque(), threading.Lock()
+
+    def check(self, visitor):
+        """Return 0 if allowed (and record the call), else seconds to wait."""
+        now = time.time()
+        with self.lock:
+            while self.all_hits and now - self.all_hits[0] > 86400:
+                self.all_hits.popleft()
+            if len(self.all_hits) >= self.daily_cap:
+                return int(86400 - (now - self.all_hits[0])) + 1
+            q = self.hits.setdefault(visitor, deque())
+            while q and now - q[0] > self.window:
+                q.popleft()
+            if len(q) >= self.per_visitor:
+                return int(self.window - (now - q[0])) + 1
+            q.append(now)
+            self.all_hits.append(now)
+            if len(self.hits) > 10000:  # drop idle visitors so memory stays small
+                self.hits = {k: v for k, v in self.hits.items() if v and now - v[-1] < self.window}
+            return 0
+
+
+LIMITER = None  # created at startup, after .env is loaded
 
 
 def load_env():
@@ -203,7 +249,7 @@ def call_openrouter(system, user):
     req = urllib.request.Request(OPENROUTER_URL, data=body, method="POST", headers={
         "Authorization": f"Bearer {key}",
         "Content-Type": "application/json",
-        "X-Title": "Heya Wrapped (local)",
+        "X-Title": "Heya Wrapped",
     })
     t0 = time.time()
     try:
@@ -231,25 +277,56 @@ def call_openrouter(system, user):
 # ---------- HTTP ----------
 
 class Handler(SimpleHTTPRequestHandler):
+    timeout = 20  # drop clients that open a connection and stall
+    server_version = "Heya"
+    sys_version = ""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(APP_DIR), **kwargs)
 
-    def send_json(self, code, obj):
+    def end_headers(self):
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Referrer-Policy", "strict-origin-when-cross-origin")
+        if os.environ.get("RENDER"):  # only over HTTPS in production
+            self.send_header("Strict-Transport-Security", "max-age=31536000")
+        super().end_headers()
+
+    def visitor(self):
+        """Client IP. Behind Render's proxy the first X-Forwarded-For entry is the visitor."""
+        fwd = self.headers.get("X-Forwarded-For", "")
+        return fwd.split(",")[0].strip() if fwd else self.client_address[0]
+
+    def send_json(self, code, obj, headers=None):
         body = json.dumps(obj).encode()
         self.send_response(code)
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-store")
+        for k, v in (headers or {}).items():
+            self.send_header(k, v)
         self.end_headers()
         self.wfile.write(body)
 
+    def send_head(self):
+        """Serve only allowlisted files (used by both GET and HEAD)."""
+        path = posixpath.normpath(urllib.parse.unquote(urllib.parse.urlsplit(self.path).path))
+        rel = PUBLIC_FILES.get(path) or PUBLIC_FILES.get(path + "/")
+        if not rel:
+            self.send_error(404, "Not found")
+            return None
+        self.path = "/" + rel
+        return super().send_head()
+
     def do_GET(self):
-        if self.path.startswith("/api/stats"):
-            wearer = self.path.rsplit("=", 1)[-1]
+        url = urllib.parse.urlsplit(self.path)
+        if url.path == "/api/stats":
+            wearer = urllib.parse.parse_qs(url.query).get("wearer", [""])[0]
             if wearer not in DATA:
                 return self.send_json(404, {"error": "unknown wearer"})
             return self.send_json(200, compute_stats(json.loads(DATA[wearer].read_text())))
-        if self.path.lstrip("/").startswith(("server.py", "data/")):
-            return self.send_json(404, {"error": "not found"})
+        if url.path == "/healthz":
+            return self.send_json(200, {"ok": True})
         return super().do_GET()
 
     def do_POST(self):
@@ -257,9 +334,23 @@ class Handler(SimpleHTTPRequestHandler):
             return self.send_json(404, {"error": "not found"})
         try:
             length = int(self.headers.get("Content-Length", 0))
+        except ValueError:
+            return self.send_json(400, {"error": "bad request"})
+        if length > MAX_BODY:
+            return self.send_json(413, {"error": "request too large"})
+        try:
             wearer = json.loads(self.rfile.read(length) or b"{}").get("wearer")
-            if wearer not in DATA:
-                return self.send_json(400, {"error": "wearer must be 'grant' or 'faith'"})
+        except (ValueError, AttributeError):
+            return self.send_json(400, {"error": "body must be JSON like {\"wearer\": \"faith\"}"})
+        if wearer not in DATA:
+            return self.send_json(400, {"error": "wearer must be 'grant' or 'faith'"})
+        wait = LIMITER.check(self.visitor())
+        if wait:
+            mins = max(1, round(wait / 60))
+            print(f"[wrapped] rate limited {self.visitor()} for {wait}s")
+            return self.send_json(429, {"error": f"You've made a lot of Wrappeds. Try again in about {mins} minute{'s' * (mins != 1)}."},
+                                  {"Retry-After": str(wait)})
+        try:
             stats = compute_stats(json.loads(DATA[wearer].read_text()))
             system, user, cards = build_prompt(stats)
             text, run = call_openrouter(system, user)
@@ -277,19 +368,22 @@ class Handler(SimpleHTTPRequestHandler):
                   f"{run['output_tokens']} out, ${run['cost_usd']:.6f}, {run['ms']} ms"
                   + ("" if story.get("caption_from_ai", True) else ", caption fallback used"))
             return self.send_json(200, {"stats": stats, "story": story, "run": run})
-        except Exception as e:  # show a readable error in the app instead of a crash
+        except Exception as e:  # details go to the server log only, never to the browser
             print(f"[wrapped] error: {e}")
-            return self.send_json(502, {"error": str(e)})
+            return self.send_json(502, {"error": "Couldn't write your Wrapped right now. Try again in a minute."})
 
     def log_message(self, fmt, *args):
-        if not self.path.startswith(("/api/stats",)):
+        if not self.path.startswith(("/api/stats", "/healthz")):
             super().log_message(fmt, *args)
 
 
 if __name__ == "__main__":
     load_env()
+    LIMITER = RateLimiter()
+    host = os.environ.get("HOST", "127.0.0.1")  # Render sets HOST=0.0.0.0 (see render.yaml)
     port = int(os.environ.get("PORT", "8000"))
-    print(f"Heya Wrapped running at http://localhost:{port}  (Ctrl+C to stop)")
+    print(f"Heya Wrapped running at http://{host}:{port}  (Ctrl+C to stop)")
+    print(f"Rate limits: {LIMITER.per_visitor} per visitor per {LIMITER.window}s, {LIMITER.daily_cap} per day site-wide")
     if not os.environ.get("OPENROUTER_API_KEY"):
         print("Warning: no OPENROUTER_API_KEY in .env yet; 'Make my Wrapped' will show an error.")
-    ThreadingHTTPServer(("127.0.0.1", port), Handler).serve_forever()
+    ThreadingHTTPServer((host, port), Handler).serve_forever()

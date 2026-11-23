@@ -1,0 +1,2 @@
+# Heya Wrapped uses only the Python standard library. No third-party packages.
+# Kept so Render's Python build and pip-audit have a file to read.
