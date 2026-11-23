@@ -8,7 +8,7 @@ Guidance for AI coding agents (and people) working in this repository.
 - **Context:** Building with AI, Fall 2026 (`building-with-ai-f26`)
 - **Repo:** https://github.com/building-with-ai-f26/tmw8694-Heya
 - **Product page:** https://building-with-ai-f26.github.io/tmw8694-Heya/ (GitHub Pages, served from `docs/` on `main`)
-- **Wrapped app (live):** Render web service `heya-wrapped` (URL in the Render dashboard; see "Deploy the Wrapped app"). Security audit: `SECURITY.md`.
+- **Wrapped app (live):** https://heya-wrapped.onrender.com (Render web service `heya-wrapped`; see "Deploy the Wrapped app"). Security audit: `SECURITY.md`.
 - **Current priorities:** `ROADMAP.md` (Xcode proximity spike first; bracelet vs. phone/watch question).
 - **Product truth:** `PRODUCT.md` (users, purpose, privacy rules). **Visual system:** `DESIGN.md`. Heya's look is the iPhone app's (black ground, cards, metal LED ring, mood pills, pixel avatars, SF Pro); the product page uses it. The Wrapped app still uses the Sidewalk Chalk section until it's restyled.
 
