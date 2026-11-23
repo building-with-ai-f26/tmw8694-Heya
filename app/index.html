@@ -14,7 +14,7 @@
       person_profiles: 'identified_only',
       persistence: 'localStorage'
     });
-    posthog.register({ heya_page: 'Heya Wrapped (local app)', heya_local: true });
+    posthog.register({ heya_page: 'Heya Wrapped', heya_local: /^(localhost|127\.0\.0\.1)$/.test(location.hostname), heya_host: location.hostname });
   </script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>

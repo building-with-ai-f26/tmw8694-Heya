@@ -50,7 +50,7 @@ Fixed in `app/server.py` (`RateLimiter`):
 - **Site-wide:** 300 AI calls per 24 hours, a backstop even if someone rotates IPs or fakes `X-Forwarded-For`. At current prices that caps spending at roughly $0.12/day.
 - All three numbers are environment variables (`RATE_LIMIT_PER_VISITOR`, `RATE_WINDOW_SECONDS`, `DAILY_AI_CAP`), so they can be changed on Render without a code change.
 - `/api/stats` doesn't call a paid API and there's no database, so it isn't limited.
-- **Provider cap:** the production OpenRouter key should have a credit limit (AGENTS.md, Deploy step 2). This is the hard stop if the code limits ever fail.
+- **Provider cap:** the production OpenRouter key should have a credit limit (AGENTS.md > Shipping > One-time setup). This is the hard stop if the code limits ever fail.
 
 Test (local, limit set to 5 at the time; repeat on live):
 

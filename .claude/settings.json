@@ -17,7 +17,12 @@
       "Bash(gh repo delete:*)",
       "Bash(gh api -X DELETE:*)",
       "Bash(render:*)",
-      "Bash(curl -X DELETE:*)"
+      "Bash(curl -X DELETE:*)",
+      "Bash(git commit:*)",
+      "Edit(./app/data/**)",
+      "Write(./app/data/**)",
+      "Edit(./.claude/settings.json)",
+      "Edit(./render.yaml)"
     ]
   }
 }

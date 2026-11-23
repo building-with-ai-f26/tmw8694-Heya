@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Heya: PRD v2</title>
+  <title>Heya: PRD v3</title>
   <meta name="description" content="Heya: a light-up friendship bracelet and app. Product page, PRD and build logs.">
   <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
@@ -309,7 +309,7 @@
       <div>
         <h1>Heya</h1>
         <p class="tagline">A light-up bracelet that gets people off their screens and into real time with friends.</p>
-        <p class="meta">PRD v2 · Building with AI, Fall 2026 · <a href="#prd2">PRD v2</a> · <a href="#summary">PRD v1</a></p>
+        <p class="meta">PRD v3 · Building with AI, Fall 2026 · <a href="https://heya-wrapped.onrender.com">Heya Wrapped (live)</a> · <a href="#prd3">PRD v3</a> · <a href="#build3">Build 3 log</a> · <a href="#prd2">PRD v2</a> · <a href="#summary">PRD v1</a></p>
         <a class="button" id="demo-button" href="prototype.html">Try the prototype</a>
       </div>
       <figure class="band" aria-label="The Heya band. Pick a mood to light it.">
@@ -404,6 +404,76 @@
         });
       })();
     </script>
+
+    <section aria-labelledby="prd3">
+      <h2 id="prd3">PRD v3: Heya Wrapped goes live</h2>
+      <p class="meta">Build 3 · November 2026 · adds hosting, data and security to PRD v2</p>
+      <p>Build 3 puts Heya Wrapped on a public URL so testers can open it on their own phones: <a href="https://heya-wrapped.onrender.com">heya-wrapped.onrender.com</a>. The product is the same as PRD v2. What's new is where it runs and how it's protected.</p>
+
+      <h3>Hosting</h3>
+      <ul>
+        <li><strong>Wrapped app: Render</strong> (free web service). Wrapped needs a running Python server, because the server holds the OpenRouter key, calculates the stats and makes the AI call. GitHub Pages can only serve files, so it can't do that. The setup is in <code>render.yaml</code>, and every push to <code>main</code> redeploys.</li>
+        <li><strong>Product page and prototype: GitHub Pages</strong>, unchanged. They're plain HTML with no secrets.</li>
+        <li><strong>Trade-off:</strong> the free plan sleeps after about 15 minutes idle, so the first visit can take up to a minute. That's fine for testing; a paid plan ($7 a month) would remove it.</li>
+      </ul>
+
+      <h3>Database</h3>
+      <p><strong>None, on purpose.</strong> Wrapped reads two fictional tap histories that ship with the code and doesn't save anything a visitor does, so there's no sign-in and no database. Adding one now would mean more to secure without changing what testers see. A real Heya would need one to store taps from real bracelets. When that happens it will be a hosted Postgres (Supabase or Neon) with Row Level Security on every table, and all writes going through the server.</p>
+
+      <h3>Security</h3>
+      <p>The full audit is in <a href="https://github.com/building-with-ai-f26/tmw8694-Heya/blob/main/SECURITY.md"><code>SECURITY.md</code></a>. The main choices:</p>
+      <ul>
+        <li><strong>The API key never leaves the server.</strong> It's stored in Render's settings, not in the repo or the page. A search of the repo, its full history and the live page found no keys. The only token in the page is PostHog's public one.</li>
+        <li><strong>The AI route is rate-limited.</strong> Each visitor gets 10 Wrapped runs per 10 minutes, and the whole site gets 300 a day. After that the server answers with a 429 and a "try again in a few minutes" message. On the live site, 30 calls in a row gave 10 successes and 20 blocked.</li>
+        <li><strong>Spending has a hard cap.</strong> The live site uses its own OpenRouter key with a $2 monthly limit and auto top-up turned off. At about $0.0004 per run, that's about 5,000 runs a month.</li>
+        <li><strong>Only the page and its font are served.</strong> Testing found five ways to download the server's code and data files. The server now serves only an allowlist, and everything else returns 404.</li>
+        <li><strong>Visitors can't steer the AI.</strong> The only input is choosing Grant or Faith. Every word the AI writes is escaped before it's shown on the page.</li>
+        <li><strong>Kids' privacy is unchanged.</strong> Grant's data still has no locations, and no coordinates are ever sent to the AI.</li>
+      </ul>
+
+      <h3>Analytics</h3>
+      <p>PostHog and session replay run on the live site as they did locally, and the "Heads up, testers" notice is still shown. Live events are tagged with the site's hostname, so real tester visits can be told apart from my own local testing.</p>
+    </section>
+
+    <section aria-labelledby="build3">
+      <h2 id="build3">Build 3 log</h2>
+      <p class="meta">November 22, 2026 · commits <code>a5c8e4c</code> onward</p>
+
+      <h3>What shipped</h3>
+      <ul>
+        <li><strong>Heya Wrapped is live</strong> at <a href="https://heya-wrapped.onrender.com">heya-wrapped.onrender.com</a> and works on a phone, start to finish, for both Grant and Faith.</li>
+        <li><strong>A security audit</strong> (<code>SECURITY.md</code>) covering the key search, rate limits, a spending cap, a dependency audit and an attack log, plus the server fixes it led to.</li>
+        <li><strong>Guardrails for the coding agent</strong> in <code>AGENTS.md</code> and <code>.claude/settings.json</code>: written shipping steps, an "ask me first" list for anything destructive, secret or paid, and rules based on real mistakes.</li>
+        <li><strong>The two-phone Bluetooth test passed.</strong> The native iPhone app found the other phone and recorded a bump-to-tap, which was Priority 1 on the roadmap.</li>
+      </ul>
+
+      <h3>What I learned</h3>
+      <ul>
+        <li><strong>"It works on my laptop" hid real problems.</strong> Locally, nobody else could reach the server, so the missing rate limit and the leaky file check didn't matter. Both became real once the site was public.</li>
+        <li><strong>A blocklist that looks right can still leak.</strong> The check hiding <code>server.py</code> was beaten by <code>/./server.py</code>, <code>/%73erver.py</code>, a <code>../</code> path and a HEAD request. Listing what <em>is</em> allowed is safer than listing what isn't.</li>
+        <li><strong>A rate limit per IP address is fuzzy.</strong> A whole class on campus Wi-Fi can share one address, and a visitor can fake the header the limit relies on. A site-wide daily cap and a provider spending limit are what actually guarantee the cost.</li>
+      </ul>
+
+      <h3>What broke</h3>
+      <ul>
+        <li><strong>The server's file check could be bypassed in five ways</strong> (fixed before deploying).</li>
+        <li><strong>The server only listened on <code>127.0.0.1</code>,</strong> so Render couldn't reach it (fixed with a <code>HOST</code> setting).</li>
+        <li><strong>PostHog tagged every visit as local testing,</strong> because <code>heya_local: true</code> was hard-coded (fixed: it now checks the hostname).</li>
+        <li><strong>Faking <code>X-Forwarded-For</code> resets the per-visitor limit on the live site.</strong> This one is still open and logged in <code>SECURITY.md</code>. The daily cap and the $2 limit keep spending bounded.</li>
+      </ul>
+
+      <h3>Spend</h3>
+      <ul>
+        <li><strong>OpenRouter: under $0.01.</strong> About 17 Wrapped runs during testing (6 local, 11 live) at $0.0003–0.0004 each.</li>
+        <li><strong>Render: $0</strong> (free plan). <strong>Database: $0</strong> (none). <strong>PostHog: $0</strong> (free tier).</li>
+        <li><strong>AI tools:</strong> Claude Code (Opus 5.5). The subscription isn't counted here.</li>
+      </ul>
+
+      <h3>Hours</h3>
+      <ul>
+        <li><strong>Nov 22:</strong> deploy, security audit, fixes and docs, with commits from 22:13 to 22:43 ET.</li>
+      </ul>
+    </section>
 
     <section aria-labelledby="prd2">
       <h2 id="prd2">PRD v2: Heya Wrapped</h2>
