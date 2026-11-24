@@ -26,7 +26,8 @@ Guidance for AI coding agents (and people) working in this repository.
 | `app/fonts/` | Self-hosted Inter (`Inter-OFL.txt`), the SF Pro fallback. Bricolage Grotesque is from the old chalk look and no longer used. |
 | `ios/Heya.xcodeproj` | iPhone app that runs the same Wrapped page. The Swift server in `ios/Heya/` replaces `app/server.py` on the device. |
 | `ios-native/Heya.swiftpm` | Tara's native SwiftUI app (Look, Places, Friends, You) with real Bluetooth friend-finding, bump-to-tap and Demo mode. Open the `.swiftpm` folder in Xcode. Separate from `ios/`. |
-| `ios-native/TEST-PLAN.md` | Two-phone Bluetooth test plan for Tara and Jorge. |
+| `ios-native/HeyaApp.xcodeproj`, `ios-native/HeyaApp/Info.plist` | Xcode project that builds the same `Heya.swiftpm` files with Bluetooth background modes on (Playgrounds packages can't). Use it on real phones. It syncs the folder, so new Swift files need no project edits; `Package.swift` and `README.md` are excluded. |
+| `ios-native/TEST-PLAN.md` | Two-phone Bluetooth test plan for Tara and Jorge. | Results go in its Results section.
 | `ROADMAP.md` | Shared plan and priorities for Tara and Jorge. |
 | `.env.example` | Template for the secret settings. Copy to `.env`. |
 | `render.yaml`, `requirements.txt` | Render Blueprint for the live Wrapped app. `requirements.txt` is empty on purpose (standard library only). |

@@ -38,11 +38,34 @@ final class HeyaRadio: NSObject {
     private var known: [UUID: CBPeripheral] = [:]
     private var connecting: Set<UUID> = []
     private var pruneTimer: Timer?
+    private var inBackground = false
+
+    /// True only in the Xcode build (`ios-native/HeyaApp.xcodeproj`), whose Info.plist turns on
+    /// Bluetooth background modes. The Swift Playgrounds build (.swiftpm) can't, so there
+    /// Heya only finds friends while it's open, as before.
+    static let canRunInBackground: Bool = {
+        let modes = Bundle.main.object(forInfoDictionaryKey: "UIBackgroundModes") as? [String] ?? []
+        return modes.contains("bluetooth-central") && modes.contains("bluetooth-peripheral")
+    }()
+
+    /// How long a phone stays "nearby" after it was last heard. In the background iOS
+    /// reports phones far less often, so a short window would make friends flicker away.
+    private var forgetAfter: TimeInterval { inBackground ? 120 : 8 }
+    /// How often to re-read a phone's profile (moods change). Slower in the background to save battery.
+    private var rereadEvery: TimeInterval { inBackground ? 60 : 6 }
 
     override init() {
         super.init()
-        central = CBCentralManager(delegate: self, queue: nil)
-        peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+        // With background modes on, a restore ID lets iOS relaunch Heya for Bluetooth
+        // events after it was closed to free memory.
+        central = CBCentralManager(
+            delegate: self, queue: nil,
+            options: HeyaRadio.canRunInBackground ? [CBCentralManagerOptionRestoreIdentifierKey: "heya.central"] : nil
+        )
+        peripheralManager = CBPeripheralManager(
+            delegate: self, queue: nil,
+            options: HeyaRadio.canRunInBackground ? [CBPeripheralManagerOptionRestoreIdentifierKey: "heya.peripheral"] : nil
+        )
         pruneTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             self?.prune()
         }
@@ -69,6 +92,13 @@ final class HeyaRadio: NSObject {
         isActive = true
         startScanning()
         refreshAdvertising()
+    }
+
+    /// Tell the radio whether the app is on screen. Scanning and advertising keep going in
+    /// the background (Xcode build only); only the timing changes.
+    func setBackground(_ background: Bool) {
+        inBackground = background
+        if !background { startScanning() }  // back on screen: get frequent updates again
     }
 
     // MARK: Internals
@@ -113,9 +143,9 @@ final class HeyaRadio: NSObject {
         )
     }
 
-    /// Forget phones not heard from in the last 8 seconds.
+    /// Forget phones not heard from recently (8 seconds on screen, 2 minutes in the background).
     private func prune() {
-        let cutoff = Date().addingTimeInterval(-8)
+        let cutoff = Date().addingTimeInterval(-forgetAfter)
         let before = peers.count
         peers = peers.filter { $0.value.lastSeen >= cutoff }
         if peers.count != before { publish() }
@@ -125,11 +155,11 @@ final class HeyaRadio: NSObject {
         onPeersChanged?(Array(peers.values))
     }
 
-    /// Read a phone's profile when first heard, then refresh every 6 seconds (moods change).
+    /// Read a phone's profile when first heard, then refresh every 6 seconds (60 in the background).
     private func readProfileIfNeeded(_ peripheral: CBPeripheral) {
         let id = peripheral.identifier
         guard var peer = peers[id], !connecting.contains(id) else { return }
-        if let last = peer.lastReadAttempt, Date().timeIntervalSince(last) < 6 { return }
+        if let last = peer.lastReadAttempt, Date().timeIntervalSince(last) < rereadEvery { return }
 
         peer.lastReadAttempt = Date()
         peers[id] = peer
@@ -201,6 +231,17 @@ extension HeyaRadio: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         connecting.remove(peripheral.identifier)
     }
+
+    /// iOS relaunched Heya in the background for a Bluetooth event (Xcode build only).
+    func centralManager(_ central: CBCentralManager, willRestoreState dict: [String: Any]) {
+        let restored = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral] ?? []
+        for peripheral in restored {
+            peripheral.delegate = self
+            known[peripheral.identifier] = peripheral
+            central.cancelPeripheralConnection(peripheral)  // a half-finished profile read; start fresh
+        }
+        inBackground = true
+    }
 }
 
 // MARK: - Reading another phone's profile
@@ -240,6 +281,15 @@ extension HeyaRadio: CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         if peripheral.state == .poweredOn {
             refreshAdvertising()
+        }
+    }
+
+    /// iOS relaunched Heya and still has our service published; don't add it twice.
+    func peripheralManager(_ peripheral: CBPeripheralManager, willRestoreState dict: [String: Any]) {
+        let services = dict[CBPeripheralManagerRestoredStateServicesKey] as? [CBMutableService] ?? []
+        if services.contains(where: { $0.uuid == HeyaRadio.serviceUUID }) {
+            serviceRequested = true
+            serviceReady = true
         }
     }
 

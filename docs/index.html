@@ -437,14 +437,15 @@
 
     <section aria-labelledby="build3">
       <h2 id="build3">Build 3 log</h2>
-      <p class="meta">November 22, 2026 · commits <code>a5c8e4c</code> onward</p>
+      <p class="meta">November 22–23, 2026 · commits <code>a5c8e4c</code> onward</p>
 
       <h3>What shipped</h3>
       <ul>
         <li><strong>Heya Wrapped is live</strong> at <a href="https://heya-wrapped.onrender.com">heya-wrapped.onrender.com</a> and works on a phone, start to finish, for both Grant and Faith.</li>
         <li><strong>A security audit</strong> (<code>SECURITY.md</code>) covering the key search, rate limits, a spending cap, a dependency audit and an attack log, plus the server fixes it led to.</li>
         <li><strong>Guardrails for the coding agent</strong> in <code>AGENTS.md</code> and <code>.claude/settings.json</code>: written shipping steps, an "ask me first" list for anything destructive, secret or paid, and rules based on real mistakes.</li>
-        <li><strong>The two-phone Bluetooth test passed.</strong> The native iPhone app found the other phone and recorded a bump-to-tap, which was Priority 1 on the roadmap.</li>
+        <li><strong>The two-phone Bluetooth test passed.</strong> On an iPhone 17 and an iPhone 12 mini, the native app found the other phone, and bump-to-tap saved the moment easily (7 of 9 tests run; the distance tests are next).</li>
+        <li><strong>The phone can stand in for the bracelet while it's locked.</strong> While bracelet parts are on order, the iPhone app is the product. A new Xcode build keeps Bluetooth running in the background and shows "<em>Name</em> is nearby · Let's hang" on the lock screen, the phone's version of the bracelet's glow. It's untested on two phones so far.</li>
       </ul>
 
       <h3>What I learned</h3>
@@ -459,6 +460,7 @@
         <li><strong>The server's file check could be bypassed in five ways</strong> (fixed before deploying).</li>
         <li><strong>The server only listened on <code>127.0.0.1</code>,</strong> so Render couldn't reach it (fixed with a <code>HOST</code> setting).</li>
         <li><strong>PostHog tagged every visit as local testing,</strong> because <code>heya_local: true</code> was hard-coded (fixed: it now checks the hostname).</li>
+        <li><strong>Swift Playgrounds apps can't run Bluetooth in the background.</strong> The app was a <code>.swiftpm</code> package, and that format has no setting for background modes. It now also builds from a regular Xcode project that uses the same code.</li>
         <li><strong>Faking <code>X-Forwarded-For</code> resets the per-visitor limit on the live site.</strong> This one is still open and logged in <code>SECURITY.md</code>. The daily cap and the $2 limit keep spending bounded.</li>
       </ul>
 
@@ -472,6 +474,7 @@
       <h3>Hours</h3>
       <ul>
         <li><strong>Nov 22:</strong> deploy, security audit, fixes and docs, with commits from 22:13 to 22:43 ET.</li>
+        <li><strong>Nov 23:</strong> background Bluetooth and the lock-screen alert for the iPhone app, plus the two-phone test results.</li>
       </ul>
     </section>
 

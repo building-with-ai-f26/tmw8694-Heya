@@ -1,6 +1,7 @@
 import SwiftUI
 import Observation
 import CoreLocation
+import UserNotifications
 
 /// The shared moment after a tap.
 struct Celebration: Equatable {
@@ -62,6 +63,13 @@ final class AppState {
     @ObservationIgnored private var radio: HeyaRadio?
     @ObservationIgnored private let bumps = BumpDetector()
     @ObservationIgnored private let locator = Locator()
+
+    /// True while Heya is off screen (locked phone, another app, in a pocket).
+    @ObservationIgnored private var inBackground = false
+    /// When each friend last triggered a "nearby" alert, so a friend at the edge of range
+    /// doesn't buzz you over and over.
+    @ObservationIgnored private var lastAlerted: [UUID: Date] = [:]
+    static let alertCooldown: TimeInterval = 20 * 60
 
     init() {
         let stored = UserDefaults.standard
@@ -148,6 +156,34 @@ final class AppState {
             Task { @MainActor in self?.bumped() }
         }
         bumps.start()
+        // Alerts only make sense when Heya can listen in the background (Xcode build).
+        if HeyaRadio.canRunInBackground {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        }
+    }
+
+    // MARK: - Off screen
+
+    /// Called when Heya leaves or returns to the screen.
+    func setInBackground(_ background: Bool) {
+        inBackground = background
+        radio?.setBackground(background)
+    }
+
+    /// The phone's stand-in for the bracelet's glow: a lock-screen alert when a friend
+    /// shows up nearby with a lit mood. Only while Heya is off screen, only if you're
+    /// lit yourself (Off means you're not looking), and at most once per friend every 20 minutes.
+    private func alertFriendNearby(_ friend: Friend) {
+        guard inBackground, !demoMode, mood.isLit, friend.isFriend, friend.mood.isLit else { return }
+        if let last = lastAlerted[friend.id], Date().timeIntervalSince(last) < AppState.alertCooldown { return }
+        lastAlerted[friend.id] = Date()
+
+        let content = UNMutableNotificationContent()
+        content.title = "\(friend.name) is nearby"
+        content.body = friend.mood.title
+        content.sound = .default
+        let request = UNNotificationRequest(identifier: "nearby-\(friend.id)", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
     }
 
     private func stopRadio() {
@@ -184,6 +220,12 @@ final class AppState {
 
         for index in realFriends.indices {
             let id = realFriends[index].id
+            let wasVisible = realFriends[index].isNearby && realFriends[index].mood.isLit
+            defer {
+                if !wasVisible, realFriends[index].isNearby, realFriends[index].mood.isLit {
+                    alertFriendNearby(realFriends[index])
+                }
+            }
             if let peer = byFriendID[id], let profile = peer.profile {
                 realFriends[index].isNearby = true
                 // "Quiet company" shows only to the inner circle; everyone else sees nothing.

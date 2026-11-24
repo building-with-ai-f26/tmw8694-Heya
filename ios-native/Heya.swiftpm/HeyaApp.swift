@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct HeyaApp: App {
     @State private var state = AppState()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
@@ -10,6 +11,9 @@ struct HeyaApp: App {
                 .environment(state)
                 .preferredColorScheme(.dark)
                 .tint(Mood.hang.color)
+        }
+        .onChange(of: scenePhase) { _, phase in
+            state.setInBackground(phase == .background)
         }
     }
 }
